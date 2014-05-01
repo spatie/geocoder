@@ -1,0 +1,32 @@
+{
+    "name": "spatie/geocoder",
+    "description": "Geocoding addresses to coordinates",
+    "keywords":
+        [
+            "geocode",
+            "map",
+            "coordinate",
+            "location",
+            "laravel"
+        ],
+    "authors": [
+        {
+            "name": "Freek Van der Herten",
+            "email": "freek@spatie.be"
+        }
+    ],
+    "require": {
+        "php": ">=5.4.0",
+        "illuminate/support": "4.1.*",
+        "guzzle/guzzle": "3.8.1"
+    },
+    "require-dev": {
+        "phpspec/phpspec": "2.0.*@dev"
+    },
+    "autoload": {
+        "psr-0": {
+            "Spatie\\Geocoder": "src/"
+        }
+    },
+    "minimum-stability": "stable"
+}
