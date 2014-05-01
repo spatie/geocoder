@@ -1,6 +1,8 @@
 # Geocode addresses to coordinates
 
-[![Build Status](https://travis-ci.org/freekmurze/geocoder.svg?branch=master)](https://travis-ci.org/freekmurze/geocoder)
+[![Build Status](https://secure.travis-ci.org/freekmurze/geocoder.png)](http://travis-ci.org/freekmurze/geocoder)
+[![Latest Stable Version](https://poser.pugx.org/spatie/geocoder/version.png)](https://packagist.org/packages/pugx/badge-poser)
+[![License](https://poser.pugx.org/spatie/geocoder/license.png)](https://packagist.org/packages/spatie/geocoder)
 
 The package can convert any address to GPS coordinates.
 
