@@ -24,7 +24,7 @@ When using Laravel there is a service provider that you can make use of.
 
 'providers' => [
     '...',
-    'Spatie\GeocoderServiceProvider'
+    'Spatie\Geocoder\GeocoderServiceProvider'
 ];
 ```
 
