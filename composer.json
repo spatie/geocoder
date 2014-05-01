@@ -9,6 +9,7 @@
             "location",
             "laravel"
         ],
+    "license": "MIT",
     "authors": [
         {
             "name": "Freek Van der Herten",
