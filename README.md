@@ -63,6 +63,6 @@ The accuracy key can contain these values:
 - 'GEOMETRIC_CENTER'
 - 'APPROXIMATE'
 
-You can read lore information about these values [on the Google Geocoding API Page](https://developers.google.com/maps/documentation/geocoding/ "Google Geocoding API")
+You can read more information about these values [on the Google Geocoding API Page](https://developers.google.com/maps/documentation/geocoding/ "Google Geocoding API")
 
 When an address is not found accuracy will contain 'NOT_FOUND'
