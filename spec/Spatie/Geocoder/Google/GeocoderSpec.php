@@ -2,7 +2,7 @@
 
 namespace spec\Spatie\Geocoder\Google;
 
-use Guzzle\Service\Client;
+use GuzzleHttp\Client();
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Spatie\Geocoder\Geocoder;
