@@ -19,7 +19,7 @@
     "require": {
         "php": ">=5.4.0",
         "illuminate/support": "~4.2",
-        "guzzlehttp/guzzle": "~4.0"
+        "guzzlehttp/guzzle": "~3.0"
     },
     "require-dev": {
         "phpspec/phpspec": "2.0.*@dev"
