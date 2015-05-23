@@ -8,7 +8,7 @@ The package can convert any address to GPS coordinates.
 
 ## Installation
 
-You can install this package through Composer.
+You can install this package through composer.
 
 ```js
 {
