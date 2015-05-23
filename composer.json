@@ -1,6 +1,7 @@
 {
     "name": "spatie/geocoder",
     "description": "Geocoding addresses to coordinates",
+    "homepage": "https://github.com/spatie/geocoder",
     "keywords":
         [
             "geocode",
