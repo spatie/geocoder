@@ -5,25 +5,27 @@
 [![Build Status](https://img.shields.io/travis/spatie/geocoder/master.svg?style=flat-square)](https://travis-ci.org/spatie/geocoder)
 [![Total Downloads](https://img.shields.io/packagist/dt/spatie/geocoder.svg?style=flat-square)](https://packagist.org/packages/spatie/geocoder)
 
-The package can convert any address to GPS coordinates.
+Laravel package to convert any address to GPS coordinates.
 
 ## Installation
 
 You can install this package through composer.
 
-```js
+```json
 {
     "require": {
-		"spatie/geocoder": "dev-master"
+		"spatie/geocoder": "^2.0"
 	}
 }
 ```
+
+*Note: use ^1.0 for Laravel 4 support*
 
 When using Laravel there is a service provider that you can make use of.
 
 ```php
 
-// app/config/app.php
+// config/app.php
 
 'providers' => [
     '...',
@@ -36,7 +38,7 @@ Geocoder also comes with a facade, which provides an easy way to call the Geocod
 
 ```php
 
-// app/config/app.php
+// config/app.php
 
 'aliases' => array(
 	...
