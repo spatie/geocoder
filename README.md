@@ -7,6 +7,8 @@
 
 Laravel package to convert any address to GPS coordinates.
 
+Spatie is webdesign agency in Antwerp, Belgium. You'll find an overview of all our open source projects [on our website](https://spatie.be/opensource).
+
 ## Installation
 
 You can install this package through composer.
@@ -69,3 +71,6 @@ The accuracy key can contain these values:
 You can read more information about these values [on the Google Geocoding API Page](https://developers.google.com/maps/documentation/geocoding/ "Google Geocoding API")
 
 When an address is not found accuracy will contain 'NOT_FOUND'
+
+## About Spatie
+Spatie is webdesign agency in Antwerp, Belgium. You'll find an overview of all our open source projects [on our website](https://spatie.be/opensource).
