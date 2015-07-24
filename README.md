@@ -13,12 +13,8 @@ Spatie is webdesign agency in Antwerp, Belgium. You'll find an overview of all o
 
 You can install this package through composer.
 
-```json
-{
-    "require": {
-		"spatie/geocoder": "^2.0"
-	}
-}
+```bash
+composer require spatie/geocoder
 ```
 
 *Note: use ^1.0 for Laravel 4 support*
