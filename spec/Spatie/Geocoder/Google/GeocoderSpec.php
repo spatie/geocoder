@@ -19,7 +19,7 @@ class GeocoderSpec extends ObjectBehavior
         $this->shouldHaveType('Spatie\Geocoder\Google\Geocoder');
     }
 
-    function it_called_with_empty_query_it_should_return_false()
+    function it_should_return_false_when_called_with_empty_query()
     {
         $this->object->getCoordinatesForQuery('')->shouldReturn(false);
     }
