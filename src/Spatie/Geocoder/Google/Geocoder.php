@@ -36,7 +36,7 @@ class Geocoder implements GeocoderInterface {
             return false;
         }
 
-        $request = $this->client->get('http://maps.googleapis.com/maps/api/geocode/json');
+        $request = $this->client->get('https://maps.googleapis.com/maps/api/geocode/json');
 
         $request->getQuery()
             ->set('address', $query)
