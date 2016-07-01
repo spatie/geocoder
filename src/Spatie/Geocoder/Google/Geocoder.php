@@ -2,7 +2,7 @@
 
 namespace Spatie\Geocoder\Google;
 
-use Guzzle\Service\Client;
+use GuzzleHttp\Client;
 use Spatie\Geocoder\Geocoder as GeocoderInterface;
 
 class Geocoder implements GeocoderInterface {
@@ -35,15 +35,13 @@ class Geocoder implements GeocoderInterface {
         if ($query == '') {
             return false;
         }
-
-        $request = $this->client->get('https://maps.googleapis.com/maps/api/geocode/json');
-
-        $request->getQuery()
-            ->set('address', $query)
-            ->set('sensor', 'false');
-
+        
+        $request = $client->createRequest('GET', 'https://maps.googleapis.com/maps/api/geocode/json');
+        $requestQuery = $request->getQuery();
+        $requestQuery->set('address', $query)->set('sensor', 'false');
 
         $response = $request->send();
+        
         if ($response->getStatusCode() != 200) {
             throw new \Exception('could not connect to googleapis.com/maps/api');
         }
