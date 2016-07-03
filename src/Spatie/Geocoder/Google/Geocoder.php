@@ -5,7 +5,8 @@ namespace Spatie\Geocoder\Google;
 use GuzzleHttp\Client;
 use Spatie\Geocoder\Geocoder as GeocoderInterface;
 
-class Geocoder implements GeocoderInterface {
+class Geocoder implements GeocoderInterface
+{
 
     /**
      * @var client
@@ -35,33 +36,31 @@ class Geocoder implements GeocoderInterface {
         if ($query == '') {
             return false;
         }
-        
-        $request = $client->createRequest('GET', 'https://maps.googleapis.com/maps/api/geocode/json');
-        $requestQuery = $request->getQuery();
-        $requestQuery->set('address', $query)->set('sensor', 'false');
 
-        $response = $request->send();
-        
+        $request = $this->client->createRequest('GET', 'https://maps.googleapis.com/maps/api/geocode/json');
+        $requestQuery = $request->getQuery();
+        $requestQuery->set('address', $query);
+        $requestQuery->set('sensor', 'false');
+
+        $response = $this->client->send($request);
+
         if ($response->getStatusCode() != 200) {
             throw new \Exception('could not connect to googleapis.com/maps/api');
         }
 
         $fullResponse = $response->json();
 
-
         if (count($fullResponse['results'])) {
             $geocoderResult = [
-                'lat'=> $fullResponse['results'][0]['geometry']['location']['lat'],
-                'lng'=>$fullResponse['results'][0]['geometry']['location']['lng'],
-                'accuracy' => $fullResponse['results'][0]['geometry']['location_type']
+                'lat' => $fullResponse['results'][0]['geometry']['location']['lat'],
+                'lng' => $fullResponse['results'][0]['geometry']['location']['lng'],
+                'accuracy' => $fullResponse['results'][0]['geometry']['location_type'],
             ];
-        }
-        else {
-            $geocoderResult = ['lat'=> 0, 'lng'=> 0, 'accuracy'=> self::RESULT_NOT_FOUND];
+        } else {
+            $geocoderResult = ['lat' => 0, 'lng' => 0, 'accuracy' => self::RESULT_NOT_FOUND];
         }
 
         return $geocoderResult;
     }
 
-
-} 
+}
