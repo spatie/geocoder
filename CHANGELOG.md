@@ -1,6 +1,10 @@
 # Changelog
 
-All notable changes to `geocoader` will be documented in this file.
+All notable changes to `geocoder` will be documented in this file.
+
+### 2.1.2 - 2016-07-04
+
+- upgrade Guzzle version
 
 ### 2.1.1 - 2016-03-10
 
