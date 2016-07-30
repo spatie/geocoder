@@ -44,7 +44,6 @@ class Geocoder implements GeocoderInterface
         $request = $this->client->createRequest('GET', $this->endpoint);
         $requestQuery = $request->getQuery();
         $requestQuery->set('address', $query);
-        $requestQuery->set('sensor', 'false');
 
         $response = $this->client->send($request);
 
