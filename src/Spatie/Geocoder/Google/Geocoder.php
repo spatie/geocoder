@@ -11,8 +11,12 @@ class Geocoder implements GeocoderInterface
     /**
      * @var client
      */
-
     protected $client;
+
+    /**
+     * @var string
+     */
+    protected $endpoint = 'https://maps.googleapis.com/maps/api/geocode/json';
 
     /**
      * @param Client $client
@@ -37,7 +41,7 @@ class Geocoder implements GeocoderInterface
             return false;
         }
 
-        $request = $this->client->createRequest('GET', 'https://maps.googleapis.com/maps/api/geocode/json');
+        $request = $this->client->createRequest('GET', $this->endpoint);
         $requestQuery = $request->getQuery();
         $requestQuery->set('address', $query);
         $requestQuery->set('sensor', 'false');
