@@ -1,15 +1,17 @@
-<?php namespace Spatie\Geocoder;
+<?php
 
-interface Geocoder {
+namespace Spatie\Geocoder;
 
+interface Geocoder
+{
     /**
-     *
-     * Get the coordinates for a query
+     * Get the coordinates for a query.
      *
      * @param string $query
+     *
      * @return array
      */
-    CONST RESULT_NOT_FOUND = 'NOT FOUND';
+    const RESULT_NOT_FOUND = 'NOT FOUND';
 
     public function getCoordinatesForQuery($query);
 }

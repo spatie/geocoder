@@ -7,7 +7,6 @@ use Spatie\Geocoder\Geocoder as GeocoderInterface;
 
 class Geocoder implements GeocoderInterface
 {
-
     /**
      * @var client
      */
@@ -27,16 +26,16 @@ class Geocoder implements GeocoderInterface
     }
 
     /**
-     *
-     * Get the coordinates for a query
+     * Get the coordinates for a query.
      *
      * @param string $query
+     *
      * @return array
+     *
      * @throws \Exception
      */
     public function getCoordinatesForQuery($query)
     {
-
         if ($query == '') {
             return false;
         }
@@ -65,5 +64,4 @@ class Geocoder implements GeocoderInterface
 
         return $geocoderResult;
     }
-
 }

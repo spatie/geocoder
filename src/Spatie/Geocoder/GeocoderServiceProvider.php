@@ -1,9 +1,11 @@
-<?php namespace Spatie\Geocoder;
+<?php
+
+namespace Spatie\Geocoder;
 
 use Illuminate\Support\ServiceProvider;
 
-class GeocoderServiceProvider extends ServiceProvider {
-
+class GeocoderServiceProvider extends ServiceProvider
+{
     public function register()
     {
         $this->app->bind(
@@ -11,5 +13,4 @@ class GeocoderServiceProvider extends ServiceProvider {
             'Spatie\Geocoder\Google\Geocoder'
         );
     }
-
 }

@@ -1,9 +1,11 @@
-<?php namespace Spatie\Geocoder;
+<?php
+
+namespace Spatie\Geocoder;
 
 use Illuminate\Support\Facades\Facade;
 
-class GeocoderFacade extends Facade {
-
+class GeocoderFacade extends Facade
+{
     /**
      * Get the registered name of the component.
      *
@@ -11,8 +13,6 @@ class GeocoderFacade extends Facade {
      */
     protected static function getFacadeAccessor()
     {
-
         return 'geocoder';
     }
-
 }
