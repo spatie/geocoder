@@ -60,6 +60,7 @@ Geocoder::getCoordinatesForQuery('Infinite Loop 1, Cupertino');
 
 /* 
   This function returns an array with keys
+  "formatted_address" => "2 Infinite Loop, Cupertino, CA 95014, Stati Uniti"
   "lat" =>  37.331741000000001
   "lng" => -122.0303329
   "accuracy" => "ROOFTOP"
