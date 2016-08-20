@@ -54,12 +54,13 @@ class Geocoder implements GeocoderInterface
 
         if (count($fullResponse['results'])) {
             $geocoderResult = [
+                'formatted_address' => $fullResponse['results'][0]['formatted_address'],
                 'lat' => $fullResponse['results'][0]['geometry']['location']['lat'],
                 'lng' => $fullResponse['results'][0]['geometry']['location']['lng'],
                 'accuracy' => $fullResponse['results'][0]['geometry']['location_type'],
             ];
         } else {
-            $geocoderResult = ['lat' => 0, 'lng' => 0, 'accuracy' => self::RESULT_NOT_FOUND];
+            $geocoderResult = ['formatted_address' => self::RESULT_NOT_FOUND,'lat' => 0, 'lng' => 0, 'accuracy' => self::RESULT_NOT_FOUND];
         }
 
         return $geocoderResult;
