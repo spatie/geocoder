@@ -27,6 +27,7 @@ class GeocoderSpec extends ObjectBehavior
     {
         $callResult = $this->object->getCoordinatesForQuery('Antwerp');
         $callResult->shouldBeArray();
+        $callResult->shouldHaveKey('formatted_address');
         $callResult->shouldHaveKey('lat');
         $callResult->shouldHaveKey('lng');
         $callResult->shouldHaveKey('accuracy');
@@ -36,6 +37,7 @@ class GeocoderSpec extends ObjectBehavior
     {
         $callResult = $this->object->getCoordinatesForQuery('gibberishlocation');
         $callResult->shouldBeArray();
+        $callResult['formatted_address']->shouldBe(Geocoder::RESULT_NOT_FOUND);
         $callResult['accuracy']->shouldBe(Geocoder::RESULT_NOT_FOUND);
     }
 }
