@@ -2,23 +2,20 @@
 
 namespace Spatie\Geocoder\Google;
 
+use Exception;
 use GuzzleHttp\Client;
 use Spatie\Geocoder\Geocoder as GeocoderInterface;
 
 class Geocoder implements GeocoderInterface
 {
-    /**
-     * @var client
-     */
+    /** @var client */
     protected $client;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     protected $endpoint = 'https://maps.googleapis.com/maps/api/geocode/json';
 
     /**
-     * @param Client $client
+     * @param \GuzzleHttp\Client $client
      */
     public function __construct(Client $client)
     {
@@ -32,7 +29,7 @@ class Geocoder implements GeocoderInterface
      *
      * @return array
      *
-     * @throws \Exception
+     * @throws Exception
      */
     public function getCoordinatesForQuery($query)
     {
@@ -47,22 +44,25 @@ class Geocoder implements GeocoderInterface
         $response = $this->client->send($request);
 
         if ($response->getStatusCode() != 200) {
-            throw new \Exception('could not connect to googleapis.com/maps/api');
+            throw new Exception('could not connect to googleapis.com/maps/api');
         }
 
         $fullResponse = $response->json();
 
-        if (count($fullResponse['results'])) {
-            $geocoderResult = [
-                'formatted_address' => $fullResponse['results'][0]['formatted_address'],
-                'lat' => $fullResponse['results'][0]['geometry']['location']['lat'],
-                'lng' => $fullResponse['results'][0]['geometry']['location']['lng'],
-                'accuracy' => $fullResponse['results'][0]['geometry']['location_type'],
+        if (! count($fullResponse['results'])) {
+            return [
+                'lat' => 0,
+                'lng' => 0,
+                'accuracy' => self::RESULT_NOT_FOUND,
+                'formatted_address' => self::RESULT_NOT_FOUND,
             ];
-        } else {
-            $geocoderResult = ['formatted_address' => self::RESULT_NOT_FOUND, 'lat' => 0, 'lng' => 0, 'accuracy' => self::RESULT_NOT_FOUND];
         }
 
-        return $geocoderResult;
+        return [
+            'lat' => $fullResponse['results'][0]['geometry']['location']['lat'],
+            'lng' => $fullResponse['results'][0]['geometry']['location']['lng'],
+            'accuracy' => $fullResponse['results'][0]['geometry']['location_type'],
+            'formatted_address' => $fullResponse['results'][0]['formatted_address'],
+        ];
     }
 }
