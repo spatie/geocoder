@@ -60,7 +60,7 @@ class Geocoder implements GeocoderInterface
                 'accuracy' => $fullResponse['results'][0]['geometry']['location_type'],
             ];
         } else {
-            $geocoderResult = ['formatted_address' => self::RESULT_NOT_FOUND,'lat' => 0, 'lng' => 0, 'accuracy' => self::RESULT_NOT_FOUND];
+            $geocoderResult = ['formatted_address' => self::RESULT_NOT_FOUND, 'lat' => 0, 'lng' => 0, 'accuracy' => self::RESULT_NOT_FOUND];
         }
 
         return $geocoderResult;
