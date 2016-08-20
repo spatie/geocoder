@@ -2,6 +2,10 @@
 
 All notable changes to `geocoder` will be documented in this file.
 
+### 2.2.0 - 2016-08-20
+    
+- add `formatted_address` to result
+
 ### 2.1.3 - 2016-08-07
 
 - remove `sensor` parameter

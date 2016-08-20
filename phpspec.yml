@@ -3,4 +3,3 @@ suites:
     namespace: Spatie
     src_path: src
     spec_prefix: spec
-    
