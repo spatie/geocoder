@@ -7,7 +7,7 @@
 [![StyleCI](https://styleci.io/repos/19355432/shield)](https://styleci.io/repos/19355432)
 [![Total Downloads](https://img.shields.io/packagist/dt/spatie/geocoder.svg?style=flat-square)](https://packagist.org/packages/spatie/geocoder)
 
-Laravel package to convert any address to GPS coordinates.
+This Laravel package can convert any address to GPS coordinates.
 
 Spatie is a webdesign agency in Antwerp, Belgium. You'll find an overview of all our open source projects [on our website](https://spatie.be/opensource).
 
@@ -27,14 +27,10 @@ You can install this package through composer.
 composer require spatie/geocoder
 ```
 
-*Note: use ^1.0 for Laravel 4 support*
-
-When using Laravel there is a service provider that you can make use of.
+You must install this service provider
 
 ```php
-
 // config/app.php
-
 'providers' => [
     '...',
     'Spatie\Geocoder\GeocoderServiceProvider'
@@ -45,9 +41,7 @@ Geocoder also comes with a facade, which provides an easy way to call the Geocod
 
 
 ```php
-
 // config/app.php
-
 'aliases' => array(
 	...
 	'Geocoder' => 'Spatie\Geocoder\GeocoderFacade',
@@ -62,22 +56,22 @@ Geocoder::getCoordinatesForQuery('Infinite Loop 1, Cupertino');
 
 /* 
   This function returns an array with keys
-  "formatted_address" => "2 Infinite Loop, Cupertino, CA 95014, Stati Uniti"
   "lat" =>  37.331741000000001
   "lng" => -122.0303329
   "accuracy" => "ROOFTOP"
+  "formatted_address" => "2 Infinite Loop, Cupertino, CA 95014, Stati Uniti"
 */
 ```
 
 The accuracy key can contain these values:
-- 'ROOFTOP'
-- 'RANGE_INTERPOLATED'
-- 'GEOMETRIC_CENTER'
-- 'APPROXIMATE'
+- `ROOFTOP`
+- `RANGE_INTERPOLATED`
+- `GEOMETRIC_CENTER`
+- `APPROXIMATE`
 
 You can read more information about these values [on the Google Geocoding API Page](https://developers.google.com/maps/documentation/geocoding/ "Google Geocoding API")
 
-When an address is not found accuracy will contain 'NOT_FOUND'
+When an address is not found accuracy will contain `NOT_FOUND`
 
 ## About Spatie
 Spatie is a webdesign agency in Antwerp, Belgium. You'll find an overview of all our open source projects [on our website](https://spatie.be/opensource).
