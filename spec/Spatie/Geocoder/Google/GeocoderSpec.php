@@ -27,17 +27,17 @@ class GeocoderSpec extends ObjectBehavior
     {
         $callResult = $this->object->getCoordinatesForQuery('Antwerp');
         $callResult->shouldBeArray();
-        $callResult->shouldHaveKey('formatted_address');
         $callResult->shouldHaveKey('lat');
         $callResult->shouldHaveKey('lng');
         $callResult->shouldHaveKey('accuracy');
+        $callResult->shouldHaveKey('formatted_address');
     }
 
     public function it_should_return_not_found_when_called_with_an_unknown_location()
     {
         $callResult = $this->object->getCoordinatesForQuery('gibberishlocation');
         $callResult->shouldBeArray();
-        $callResult['formatted_address']->shouldBe(Geocoder::RESULT_NOT_FOUND);
         $callResult['accuracy']->shouldBe(Geocoder::RESULT_NOT_FOUND);
+        $callResult['formatted_address']->shouldBe(Geocoder::RESULT_NOT_FOUND);
     }
 }

@@ -30,9 +30,9 @@ class Geocoder implements GeocoderInterface
      *
      * @param string $query
      *
-     * @return array
-     *
      * @throws \Exception
+     * 
+     * @return array
      */
     public function getCoordinatesForQuery($query)
     {
@@ -44,18 +44,15 @@ class Geocoder implements GeocoderInterface
         $requestQuery = $request->getQuery();
         $requestQuery->set('address', $query);
 
-        if($lang = config('geocoder.language'))
-        {
+        if($lang = config('geocoder.language')){
             $requestQuery->set('language', $lang);
         }
 
-        if($reg = config('geocoder.region'))
-        {
+        if($reg = config('geocoder.region')){
             $requestQuery->set('region', $reg);
         }
 
-        if($api_key = config('geocoder.key'))
-        {
+        if($api_key = config('geocoder.key')){
             $requestQuery->set('key', $api_key);
         }
 
@@ -69,13 +66,18 @@ class Geocoder implements GeocoderInterface
 
         if (count($fullResponse['results'])) {
             $geocoderResult = [
+                'lat'               => $fullResponse['results'][0]['geometry']['location']['lat'],
+                'lng'               => $fullResponse['results'][0]['geometry']['location']['lng'],
+                'accuracy'          => $fullResponse['results'][0]['geometry']['location_type'],
                 'formatted_address' => $fullResponse['results'][0]['formatted_address'],
-                'lat' => $fullResponse['results'][0]['geometry']['location']['lat'],
-                'lng' => $fullResponse['results'][0]['geometry']['location']['lng'],
-                'accuracy' => $fullResponse['results'][0]['geometry']['location_type'],
             ];
         } else {
-            $geocoderResult = ['formatted_address' => self::RESULT_NOT_FOUND,'lat' => 0, 'lng' => 0, 'accuracy' => self::RESULT_NOT_FOUND];
+            $geocoderResult = [
+                'lat'               => 0,
+                'lng'               => 0,
+                'accuracy'          => self::RESULT_NOT_FOUND,
+                'formatted_address' => self::RESULT_NOT_FOUND,
+            ];
         }
 
         return $geocoderResult;
