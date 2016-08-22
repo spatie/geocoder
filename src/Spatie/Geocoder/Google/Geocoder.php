@@ -41,15 +41,15 @@ class Geocoder implements GeocoderInterface
         $requestQuery = $request->getQuery();
         $requestQuery->set('address', $query);
 
-        if($lang = config('geocoder.language')){
+        if($lang = config('geocoder.language')) {
             $requestQuery->set('language', $lang);
         }
 
-        if($reg = config('geocoder.region')){
+        if($reg = config('geocoder.region')) {
             $requestQuery->set('region', $reg);
         }
 
-        if($api_key = config('geocoder.key')){
+        if($api_key = config('geocoder.key')) {
             $requestQuery->set('key', $api_key);
         }
 
