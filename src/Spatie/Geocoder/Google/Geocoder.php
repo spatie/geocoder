@@ -31,7 +31,7 @@ class Geocoder implements GeocoderInterface
      *
      * @throws Exception
      */
-    public function getCoordinatesForQuery($query)
+    public function getCoordinatesForQuery($query, $language = null, $region = null, $api_key = null)
     {
         if ($query == '') {
             return false;
@@ -41,16 +41,38 @@ class Geocoder implements GeocoderInterface
         $requestQuery = $request->getQuery();
         $requestQuery->set('address', $query);
 
-        if ($lang = config('geocoder.language')) {
-            $requestQuery->set('language', $lang);
+        //laravel configs handling
+        if(function_exists('config'))
+        {
+            if ($lang = config('geocoder.language')) 
+            {
+                $requestQuery->set('language', $lang);
+            }
+
+            if ($reg = config('geocoder.region'))
+            {
+                $requestQuery->set('region', $reg);
+            }
+
+            if ($key = config('geocoder.key'))
+            {
+                $requestQuery->set('key', $key);
+            }
         }
 
-        if ($reg = config('geocoder.region')) {
-            $requestQuery->set('region', $reg);
+        if($language)
+        {
+            $requestQuery->set('language', $language);
         }
 
-        if ($api_key = config('geocoder.key')) {
-            $requestQuery->set('key', $api_key);
+        if($region)
+        {
+            $requestQuery->set('region', $region);
+        }
+
+        if($api_key)
+        {
+            $requestQuery->set('key', $key);
         }
 
         $response = $this->client->send($request);
