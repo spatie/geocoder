@@ -3,6 +3,8 @@
 namespace Spatie\Geocoder;
 
 use Illuminate\Support\ServiceProvider;
+use Spatie\Geocoder\Google\Geocoder;
+use GuzzleHttp\Client;
 
 class GeocoderServiceProvider extends ServiceProvider
 {
@@ -17,9 +19,13 @@ class GeocoderServiceProvider extends ServiceProvider
     {
         $this->mergeConfigFrom(__DIR__.'/../../../config/geocoder.php', 'geocoder');
 
-        $this->app->bind(
-            'geocoder',
-            'Spatie\Geocoder\Google\Geocoder'
-        );
+        $this->app->bind('geocoder', function ($app) {
+
+            return (new Geocoder(new Client))
+                ->setKey(config('geocoder.key'))
+                ->setLanguage(config('geocoder.language'))
+                ->setRegion(config('geocoder.region'));
+                
+        });
     }
 }

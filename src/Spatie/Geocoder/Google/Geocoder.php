@@ -14,6 +14,15 @@ class Geocoder implements GeocoderInterface
     /** @var string */
     protected $endpoint = 'https://maps.googleapis.com/maps/api/geocode/json';
 
+    /** @var string */
+    protected $key;
+
+    /** @var string */
+    protected $language;
+
+    /** @var string */
+    protected $region;
+
     /**
      * @param \GuzzleHttp\Client $client
      */
@@ -31,7 +40,7 @@ class Geocoder implements GeocoderInterface
      *
      * @throws Exception
      */
-    public function getCoordinatesForQuery($query, $language = null, $region = null, $api_key = null)
+    public function getCoordinatesForQuery($query, $lang = null, $reg = null, $api_key = null)
     {
         if ($query == '') {
             return false;
@@ -41,32 +50,25 @@ class Geocoder implements GeocoderInterface
         $requestQuery = $request->getQuery();
         $requestQuery->set('address', $query);
 
-        //laravel config file handling
-        if (function_exists('config')) {
-            if ($lang = config('geocoder.language')) {
-                $requestQuery->set('language', $lang);
-            }
-
-            if ($reg = config('geocoder.region')) {
-                $requestQuery->set('region', $reg);
-            }
-
-            if ($key = config('geocoder.key')) {
-                $requestQuery->set('key', $key);
-            }
+        if($lang)
+        {
+            $this->language = $lang;
         }
 
-        if ($language) {
-            $requestQuery->set('language', $language);
+        if($reg)
+        {
+            $this->region = $reg;
         }
 
-        if ($region) {
-            $requestQuery->set('region', $region);
+        if($api_key)
+        {
+            $this->key = $api_key;
         }
 
-        if ($api_key) {
-            $requestQuery->set('key', $key);
-        }
+        $requestQuery->set('key', $this->key);
+        $requestQuery->set('language', $this->language);
+        $requestQuery->set('region', $this->region);
+        
 
         $response = $this->client->send($request);
 
@@ -92,4 +94,23 @@ class Geocoder implements GeocoderInterface
             'formatted_address' => $fullResponse['results'][0]['formatted_address'],
         ];
     }
+
+    public function setKey($k) {
+        $this->key = $k;
+
+        return $this;
+    }
+
+    public function setLanguage($l) {
+        $this->language = $l;
+
+        return $this;
+    }
+
+    public function setRegion($r) {
+        $this->region = $r;
+
+        return $this;
+    }
+
 }
