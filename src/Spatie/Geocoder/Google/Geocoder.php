@@ -41,37 +41,30 @@ class Geocoder implements GeocoderInterface
         $requestQuery = $request->getQuery();
         $requestQuery->set('address', $query);
 
-        //laravel configs handling
-        if(function_exists('config'))
-        {
-            if ($lang = config('geocoder.language')) 
-            {
+        //laravel config file handling
+        if (function_exists('config')) {
+            if ($lang = config('geocoder.language')) {
                 $requestQuery->set('language', $lang);
             }
 
-            if ($reg = config('geocoder.region'))
-            {
+            if ($reg = config('geocoder.region')) {
                 $requestQuery->set('region', $reg);
             }
 
-            if ($key = config('geocoder.key'))
-            {
+            if ($key = config('geocoder.key')) {
                 $requestQuery->set('key', $key);
             }
         }
 
-        if($language)
-        {
+        if ($language) {
             $requestQuery->set('language', $language);
         }
 
-        if($region)
-        {
+        if ($region) {
             $requestQuery->set('region', $region);
         }
 
-        if($api_key)
-        {
+        if ($api_key) {
             $requestQuery->set('key', $key);
         }
 
