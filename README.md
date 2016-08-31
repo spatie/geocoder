@@ -7,7 +7,7 @@
 [![StyleCI](https://styleci.io/repos/19355432/shield)](https://styleci.io/repos/19355432)
 [![Total Downloads](https://img.shields.io/packagist/dt/spatie/geocoder.svg?style=flat-square)](https://packagist.org/packages/spatie/geocoder)
 
-This Laravel package can convert any address to GPS coordinates.
+This PHP package can convert any address to GPS coordinates.
 
 Spatie is a webdesign agency in Antwerp, Belgium. You'll find an overview of all our open source projects [on our website](https://spatie.be/opensource).
 
@@ -27,7 +27,7 @@ You can install this package through composer.
 composer require spatie/geocoder
 ```
 
-You must install this service provider
+If you are using this package with Laravel, you must install this service provider
 
 ```php
 // config/app.php
@@ -48,18 +48,41 @@ Geocoder also comes with a facade, which provides an easy way to call the Geocod
 )
 ```
 
+Next, you must publish the config file (geocoder.php):
+
+```bash
+php artisan vendor:publish --provider="Spatie\Geocoder\GeocoderServiceProvider" --tag="config"
+```
+You must set the API key bacause it is required by Google API: you can set it into the configuration file (Laravel user trick) or passing it of fourth parameter to "getCoordinatesForQuery" method.
 ## Usage
+
+The "getCoordinatesForQuery" accepts 4 parameter: the query, the language (optional), the region (optional) and the API KEY (required).
 
 ```php
 
-Geocoder::getCoordinatesForQuery('Infinite Loop 1, Cupertino');
+Geocoder::getCoordinatesForQuery('Infinite Loop 1, Cupertino', null, null, <YOUR-API-KEY>);
 
 /* 
   This function returns an array with keys
   "lat" =>  37.331741000000001
   "lng" => -122.0303329
   "accuracy" => "ROOFTOP"
-  "formatted_address" => "2 Infinite Loop, Cupertino, CA 95014, Stati Uniti"
+  "formatted_address" => "1 Infinite Loop, Cupertino, CA 95014, USA"
+*/
+```
+
+The language and region parameters are very useful in order to obtain the "formatted_address" string (into the response), translated into the proper language (English is default), for example:
+
+```php
+
+Geocoder::getCoordinatesForQuery('Infinite Loop 1, Cupertino', 'it', 'it', <YOUR-API-KEY>);
+
+/* 
+  This function returns an array with keys
+  "lat" =>  37.331741000000001
+  "lng" => -122.0303329
+  "accuracy" => "ROOFTOP"
+  "formatted_address" => "1 Infinite Loop, Cupertino, CA 95014, Stati Uniti"
 */
 ```
 
