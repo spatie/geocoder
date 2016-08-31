@@ -53,10 +53,10 @@ Next, you must publish the config file (geocoder.php):
 ```bash
 php artisan vendor:publish --provider="Spatie\Geocoder\GeocoderServiceProvider" --tag="config"
 ```
-You must set the API key bacause it is required by Google API: you can set it into the configuration file (Laravel user trick) or passing it of fourth parameter to "getCoordinatesForQuery" method.
+You must set the API key bacause it is required by Google API: you can set it into the configuration file (Laravel user trick) or passing it as fourth parameter to "getCoordinatesForQuery" method.
 ## Usage
 
-The "getCoordinatesForQuery" accepts 4 parameter: the query, the language (optional), the region (optional) and the API KEY (required).
+The "getCoordinatesForQuery" accepts 4 parameter: the query (required), the language (optional), the region (optional) and the API KEY (required).
 
 ```php
 
@@ -94,7 +94,7 @@ The accuracy key can contain these values:
 
 You can read more information about these values [on the Google Geocoding API Page](https://developers.google.com/maps/documentation/geocoding/ "Google Geocoding API")
 
-When an address is not found accuracy will contain `NOT_FOUND`
+When an address is not found accuracy and formatted_address will contain `NOT_FOUND`
 
 ## About Spatie
 Spatie is a webdesign agency in Antwerp, Belgium. You'll find an overview of all our open source projects [on our website](https://spatie.be/opensource).
