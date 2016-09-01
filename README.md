@@ -26,9 +26,9 @@ You can install this package through composer.
 ```bash
 composer require spatie/geocoder
 ```
-# Laravel installation
+## Laravel installation (OPTIONAL)
 
-If you are using this package with Laravel, you must:
+If you are using this package with Laravel, after installed it through composer, you must:
 
 Install this service provider
 
