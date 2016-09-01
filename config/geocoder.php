@@ -33,7 +33,7 @@ return [
     |   Please read: https://developers.google.com/maps/documentation/geocoding/intro#RegionCodes
     |
     */
-   
+
     'region' => 'it',
 
 ];

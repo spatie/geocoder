@@ -9,31 +9,31 @@ use Spatie\Geocoder\Geocoder as GeocoderInterface;
 class Geocoder implements GeocoderInterface
 {
     /**
-     * The HTTP client
-     * @var \GuzzleHttp\Client $client
+     * The HTTP client.
+     * @var \GuzzleHttp\Client
      */
     protected $client;
 
     /**
-     * Google Maps API endpoint
+     * Google Maps API endpoint.
      * @var string
      */
     protected $endpoint = 'https://maps.googleapis.com/maps/api/geocode/json';
 
     /**
-     * Google Maps API Key
+     * Google Maps API Key.
      * @var string
      */
     protected $key;
 
     /**
-     * The language response translation
+     * The language response translation.
      * @var string
      */
     protected $language;
 
     /**
-     * The region code used for fine tune the geocoding result
+     * The region code used for fine tune the geocoding result.
      * @var string
      */
     protected $region;
@@ -107,7 +107,7 @@ class Geocoder implements GeocoderInterface
     }
 
     /**
-     * Set the API key param for the request
+     * Set the API key param for the request.
      * @param string $k the key
      */
     public function setKey($k)
@@ -118,7 +118,7 @@ class Geocoder implements GeocoderInterface
     }
 
     /**
-     * Set the language param for the request
+     * Set the language param for the request.
      * @param string $l the language code
      */
     public function setLanguage($l)
@@ -129,7 +129,7 @@ class Geocoder implements GeocoderInterface
     }
 
     /**
-     * Set the region param for the request
+     * Set the region param for the request.
      * @param string $r the region code
      */
     public function setRegion($r)
