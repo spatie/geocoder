@@ -91,22 +91,24 @@ class Geocoder implements GeocoderInterface
         ];
     }
 
-    public function setKey($k) {
+    public function setKey($k)
+    {
         $this->key = $k;
 
         return $this;
     }
 
-    public function setLanguage($l) {
+    public function setLanguage($l)
+    {
         $this->language = $l;
 
         return $this;
     }
 
-    public function setRegion($r) {
+    public function setRegion($r)
+    {
         $this->region = $r;
 
         return $this;
     }
-
 }
