@@ -44,7 +44,7 @@ class GeocoderSpec extends ObjectBehavior
 
     public function it_should_return_data_translated_in_italian_when_called_with_language_and_region_parameters_setted_to_it()
     {
-        $callResult = $this->object->getCoordinatesForQuery('Roma', 'it', 'it');
+        $callResult = $this->object->getCoordinatesForQuery('Roma', null, 'it', 'it');
 
         $callResult->shouldBeArray();
         $callResult['formatted_address']->shouldBe('Roma, Italia');
