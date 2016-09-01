@@ -4,11 +4,11 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Google Maps API key [REQUIRED]
+    | Google Maps API key
     |--------------------------------------------------------------------------
     |   You need to set the API key, which is required to send requests
     |   to Google's maps API
-    |   Please read: https://developers.google.com/maps/documentation/geocoding/intro#geocoding
+    |   More info: https://developers.google.com/maps/documentation/geocoding/intro#geocoding
     */
 
     'key' => env('GOOGLE_MAPS_GEOCODING_API_KEY', ''),
@@ -19,21 +19,21 @@ return [
     |--------------------------------------------------------------------------
     |   The language param used to set response translations for textual data
     |   (e.g. "formatted_address" field).
-    |   Please read: https://developers.google.com/maps/faq#languagesupport
+    |   More info: https://developers.google.com/maps/faq#languagesupport
     |
     */
 
-    'language' => 'it',
+    'language' => null,
 
     /*
     |--------------------------------------------------------------------------
     | Region param [OPTIONAL]
     |--------------------------------------------------------------------------
-    |   The region param used to fine tune the geocoding process.
-    |   Please read: https://developers.google.com/maps/documentation/geocoding/intro#RegionCodes
+    |   The region param used to finetune the geocoding process.
+    |   More info: https://developers.google.com/maps/documentation/geocoding/intro#RegionCodes
     |
     */
 
-    'region' => 'it',
+    'region' => null,
 
 ];

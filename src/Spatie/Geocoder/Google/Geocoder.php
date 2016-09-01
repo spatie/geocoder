@@ -9,25 +9,21 @@ use Spatie\Geocoder\Geocoder as GeocoderInterface;
 class Geocoder implements GeocoderInterface
 {
     /**
-     * The HTTP client.
      * @var \GuzzleHttp\Client
      */
     protected $client;
 
     /**
-     * Google Maps API endpoint.
      * @var string
      */
     protected $endpoint = 'https://maps.googleapis.com/maps/api/geocode/json';
 
     /**
-     * Google Maps API Key.
      * @var string
      */
-    protected $key;
+    protected $apiKey;
 
     /**
-     * The language response translation.
      * @var string
      */
     protected $language;
@@ -47,37 +43,76 @@ class Geocoder implements GeocoderInterface
     }
 
     /**
+     * @param string $apiKey the key
+     *
+     * @return $this
+     */
+    public function setApiKey($apiKey)
+    {
+        $this->apiKey = $apiKey;
+
+        return $this;
+    }
+
+    /**
+     * @param string $language the language code
+     *
+     * @return $this
+     */
+    public function setLanguage($language)
+    {
+        $this->language = $language;
+
+        return $this;
+    }
+
+    /**
+     * @param string $region the region code
+     *
+     * @return $this
+     */
+    public function setRegion($region)
+    {
+        $this->region = $region;
+
+        return $this;
+    }
+
+    /**
      * Get the coordinates for a query.
      *
      * @param string $query
      *
+     * @param null $apiKey
+     * @param null $language
+     * @param null $region
      * @return array
      *
-     * @throws Exception
+     * @throws \Exception
      */
-    public function getCoordinatesForQuery($query, $api_key = null, $lang = null, $reg = null)
+    public function getCoordinatesForQuery($query, $apiKey = null, $language = null, $region = null)
     {
         if ($query == '') {
             return false;
         }
 
+        if ($apiKey) {
+            $this->apiKey = $apiKey;
+        }
+
+        if ($language) {
+            $this->language = $language;
+        }
+
+        if ($region) {
+            $this->region = $region;
+        }
+
         $request = $this->client->createRequest('GET', $this->endpoint);
         $requestQuery = $request->getQuery();
 
-        if ($api_key) {
-            $this->key = $api_key;
-        }
-
-        if ($lang) {
-            $this->language = $lang;
-        }
-
-        if ($reg) {
-            $this->region = $reg;
-        }
-
-        if ($this->key) {
-            $requestQuery->set('key', $this->key);
+        if ($this->apiKey) {
+            $requestQuery->set('key', $this->apiKey);
         }
 
         if ($this->language) {
@@ -113,38 +148,5 @@ class Geocoder implements GeocoderInterface
             'accuracy' => $fullResponse['results'][0]['geometry']['location_type'],
             'formatted_address' => $fullResponse['results'][0]['formatted_address'],
         ];
-    }
-
-    /**
-     * Set the API key param for the request.
-     * @param string $k the key
-     */
-    public function setKey($k)
-    {
-        $this->key = $k;
-
-        return $this;
-    }
-
-    /**
-     * Set the language param for the request.
-     * @param string $l the language code
-     */
-    public function setLanguage($l)
-    {
-        $this->language = $l;
-
-        return $this;
-    }
-
-    /**
-     * Set the region param for the request.
-     * @param string $r the region code
-     */
-    public function setRegion($r)
-    {
-        $this->region = $r;
-
-        return $this;
     }
 }
