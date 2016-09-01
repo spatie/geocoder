@@ -50,15 +50,15 @@ class Geocoder implements GeocoderInterface
         $requestQuery = $request->getQuery();
         $requestQuery->set('address', $query);
 
-        if($api_key) {
+        if ($api_key) {
             $this->key = $api_key;
         }
 
-        if($lang) {
+        if ($lang) {
             $this->language = $lang;
         }
 
-        if($reg) {
+        if ($reg) {
             $this->region = $reg;
         }
 
