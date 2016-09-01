@@ -63,7 +63,6 @@ class Geocoder implements GeocoderInterface
 
         $request = $this->client->createRequest('GET', $this->endpoint);
         $requestQuery = $request->getQuery();
-        $requestQuery->set('address', $query);
 
         if ($api_key) {
             $this->key = $api_key;
@@ -77,9 +76,15 @@ class Geocoder implements GeocoderInterface
             $this->region = $reg;
         }
 
-        $requestQuery->set('key', $this->key);
-        $requestQuery->set('language', $this->language);
-        $requestQuery->set('region', $this->region);
+        if ($this->language) {
+            $requestQuery->set('key', $this->language);
+        }
+
+        if ($this->region) {
+            $requestQuery->set('region', $this->region);   
+        }
+
+        $requestQuery->set('address', $query);
 
         $response = $this->client->send($request);
 
