@@ -8,19 +8,34 @@ use Spatie\Geocoder\Geocoder as GeocoderInterface;
 
 class Geocoder implements GeocoderInterface
 {
-    /** @var client */
+    /**
+     * The HTTP client
+     * @var \GuzzleHttp\Client $client
+     */
     protected $client;
 
-    /** @var string */
+    /**
+     * Google Maps API endpoint
+     * @var string
+     */
     protected $endpoint = 'https://maps.googleapis.com/maps/api/geocode/json';
 
-    /** @var string */
+    /**
+     * Google Maps API Key
+     * @var string
+     */
     protected $key;
 
-    /** @var string */
+    /**
+     * The language response translation
+     * @var string
+     */
     protected $language;
 
-    /** @var string */
+    /**
+     * The region code used for fine tune the geocoding result
+     * @var string
+     */
     protected $region;
 
     /**
@@ -91,6 +106,10 @@ class Geocoder implements GeocoderInterface
         ];
     }
 
+    /**
+     * Set the API key param for the request
+     * @param string $k the key
+     */
     public function setKey($k)
     {
         $this->key = $k;
@@ -98,6 +117,10 @@ class Geocoder implements GeocoderInterface
         return $this;
     }
 
+    /**
+     * Set the language param for the request
+     * @param string $l the language code
+     */
     public function setLanguage($l)
     {
         $this->language = $l;
@@ -105,6 +128,10 @@ class Geocoder implements GeocoderInterface
         return $this;
     }
 
+    /**
+     * Set the region param for the request
+     * @param string $r the region code
+     */
     public function setRegion($r)
     {
         $this->region = $r;
