@@ -76,8 +76,12 @@ class Geocoder implements GeocoderInterface
             $this->region = $reg;
         }
 
+        if ($this->key) {
+            $requestQuery->set('key', $this->key);   
+        }
+
         if ($this->language) {
-            $requestQuery->set('key', $this->language);
+            $requestQuery->set('language', $this->language);   
         }
 
         if ($this->region) {
