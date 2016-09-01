@@ -40,7 +40,7 @@ class Geocoder implements GeocoderInterface
      *
      * @throws Exception
      */
-    public function getCoordinatesForQuery($query, $lang = null, $reg = null, $api_key = null)
+    public function getCoordinatesForQuery($query, $api_key = null, $lang = null, $reg = null)
     {
         if ($query == '') {
             return false;
@@ -50,25 +50,21 @@ class Geocoder implements GeocoderInterface
         $requestQuery = $request->getQuery();
         $requestQuery->set('address', $query);
 
-        if($lang)
-        {
+        if($api_key) {
+            $this->key = $api_key;
+        }
+
+        if($lang) {
             $this->language = $lang;
         }
 
-        if($reg)
-        {
+        if($reg) {
             $this->region = $reg;
-        }
-
-        if($api_key)
-        {
-            $this->key = $api_key;
         }
 
         $requestQuery->set('key', $this->key);
         $requestQuery->set('language', $this->language);
         $requestQuery->set('region', $this->region);
-        
 
         $response = $this->client->send($request);
 

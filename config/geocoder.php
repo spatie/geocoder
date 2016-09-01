@@ -32,6 +32,4 @@ return [
     |
     */
     'region' => 'it',
-
-
 ];
