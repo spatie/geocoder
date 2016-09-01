@@ -13,5 +13,5 @@ interface Geocoder
      */
     const RESULT_NOT_FOUND = 'NOT FOUND';
 
-    public function getCoordinatesForQuery($query);
+    public function getCoordinatesForQuery($query, $language = null, $region = null, $api_key = null);
 }

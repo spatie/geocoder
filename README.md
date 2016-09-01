@@ -7,7 +7,7 @@
 [![StyleCI](https://styleci.io/repos/19355432/shield)](https://styleci.io/repos/19355432)
 [![Total Downloads](https://img.shields.io/packagist/dt/spatie/geocoder.svg?style=flat-square)](https://packagist.org/packages/spatie/geocoder)
 
-This Laravel package can convert any address to GPS coordinates.
+This PHP package can convert any address to GPS coordinates.
 
 Spatie is a webdesign agency in Antwerp, Belgium. You'll find an overview of all our open source projects [on our website](https://spatie.be/opensource).
 
@@ -26,8 +26,11 @@ You can install this package through composer.
 ```bash
 composer require spatie/geocoder
 ```
+## Laravel installation (OPTIONAL)
 
-You must install this service provider
+If you are using this package with Laravel, after installed it through composer, you must:
+
+Install this service provider
 
 ```php
 // config/app.php
@@ -37,7 +40,7 @@ You must install this service provider
 ];
 ```
 
-Geocoder also comes with a facade, which provides an easy way to call the Geocoder.
+Geocoder also comes with a facade, which provides an easy way to call the Geocoder, so you have to register it
 
 
 ```php
@@ -48,7 +51,54 @@ Geocoder also comes with a facade, which provides an easy way to call the Geocod
 )
 ```
 
+Next, you must publish the config file (geocoder.php):
+
+```bash
+php artisan vendor:publish --provider="Spatie\Geocoder\GeocoderServiceProvider" --tag="config"
+```
+You must set the API key into the config file because it is required by Google API.
+
 ## Usage
+
+The "getCoordinatesForQuery" accepts 4 parameter:
+1) the query (required)
+2) the API KEY (required in framework agnostic installation)
+3) the language (optional)
+4) the region (optional)
+
+You can call the getCoordinatesForQuery after instantiate Geocoder class.
+
+```php
+
+$geocoder = new Geocoder;
+$geocoder->getCoordinatesForQuery('Infinite Loop 1, Cupertino', <YOUR-API-KEY>, null, null);
+
+/* 
+  This function returns an array with keys
+  "lat" =>  37.331741000000001
+  "lng" => -122.0303329
+  "accuracy" => "ROOFTOP"
+  "formatted_address" => "1 Infinite Loop, Cupertino, CA 95014, USA"
+*/
+```
+
+The language and region parameters are very useful in order to obtain the "formatted_address" string (into the response), translated into the proper language (English is default), for example:
+
+```php
+
+$geocoder = new Geocoder;
+$geocoder->getCoordinatesForQuery('Infinite Loop 1, Cupertino', 'it', 'it', <YOUR-API-KEY>);
+
+/* 
+  This function returns an array with keys
+  "lat" =>  37.331741000000001
+  "lng" => -122.0303329
+  "accuracy" => "ROOFTOP"
+  "formatted_address" => "1 Infinite Loop, Cupertino, CA 95014, Stati Uniti"
+*/
+```
+
+If you are using the package with Laravel, you can simply call the getCoordinatesForQuery method on the facade, passing only the query parameter (after filled the config file parameters):
 
 ```php
 
@@ -59,7 +109,7 @@ Geocoder::getCoordinatesForQuery('Infinite Loop 1, Cupertino');
   "lat" =>  37.331741000000001
   "lng" => -122.0303329
   "accuracy" => "ROOFTOP"
-  "formatted_address" => "2 Infinite Loop, Cupertino, CA 95014, Stati Uniti"
+  "formatted_address" => "1 Infinite Loop, Cupertino, CA 95014, Stati Uniti"
 */
 ```
 
@@ -71,7 +121,7 @@ The accuracy key can contain these values:
 
 You can read more information about these values [on the Google Geocoding API Page](https://developers.google.com/maps/documentation/geocoding/ "Google Geocoding API")
 
-When an address is not found accuracy will contain `NOT_FOUND`
+When an address is not found accuracy and formatted_address will contain `NOT_FOUND`
 
 ## About Spatie
 Spatie is a webdesign agency in Antwerp, Belgium. You'll find an overview of all our open source projects [on our website](https://spatie.be/opensource).
