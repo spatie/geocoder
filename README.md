@@ -125,7 +125,7 @@ $language = 'it';
 $region = 'it';
 
 $geocoder = new Geocoder;
-$geocoder->getCoordinatesForQuery('Infinite Loop 1, Cupertino', $language, $region, $apiKey);
+$geocoder->getCoordinatesForQuery('Infinite Loop 1, Cupertino', $apiKey, $language, $region);
 
 /* 
   This function returns an array with keys
