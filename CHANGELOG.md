@@ -2,9 +2,13 @@
 
 All notable changes to `geocoder` will be documented in this file.
 
+## 2.3.1 - 2016-09-04
+
+- fixed the naming of variables in the `Geocoder` interface
+
 ### 2.3.0 - 2016-09-01
     
-- add support for regions and languages
+- added support for regions and languages
 - added Laravel integration
 
 ### 2.2.0 - 2016-08-20
