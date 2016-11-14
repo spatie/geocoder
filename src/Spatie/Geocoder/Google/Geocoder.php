@@ -4,6 +4,7 @@ namespace Spatie\Geocoder\Google;
 
 use Exception;
 use GuzzleHttp\Client;
+use GuzzleHttp\Psr7\Request;
 use Spatie\Geocoder\Geocoder as GeocoderInterface;
 
 class Geocoder implements GeocoderInterface
@@ -92,6 +93,8 @@ class Geocoder implements GeocoderInterface
      */
     public function getCoordinatesForQuery($query, $apiKey = null, $language = null, $region = null)
     {
+        $requestQuery = [];
+
         if ($query == '') {
             return false;
         }
@@ -108,32 +111,29 @@ class Geocoder implements GeocoderInterface
             $this->region = $region;
         }
 
-        $request = $this->client->createRequest('GET', $this->endpoint);
-        $requestQuery = $request->getQuery();
-
         if ($this->apiKey) {
-            $requestQuery->set('key', $this->apiKey);
+            $requestQuery['key'] = $this->apiKey;
         }
 
         if ($this->language) {
-            $requestQuery->set('language', $this->language);
+            $requestQuery['language'] = $this->language;
         }
 
         if ($this->region) {
-            $requestQuery->set('region', $this->region);
+            $requestQuery['region'] = $this->region;
         }
 
-        $requestQuery->set('address', $query);
+        $requestQuery['address'] = $query;
 
-        $response = $this->client->send($request);
+        $response = $this->client->request('GET', $this->endpoint, ['query' => $requestQuery]);
 
         if ($response->getStatusCode() != 200) {
             throw new Exception('could not connect to googleapis.com/maps/api');
         }
 
-        $fullResponse = $response->json();
+        $fullResponse = json_decode($response->getBody());
 
-        if (! count($fullResponse['results'])) {
+        if (! count($fullResponse->results)) {
             return [
                 'lat' => 0,
                 'lng' => 0,
@@ -143,10 +143,10 @@ class Geocoder implements GeocoderInterface
         }
 
         return [
-            'lat' => $fullResponse['results'][0]['geometry']['location']['lat'],
-            'lng' => $fullResponse['results'][0]['geometry']['location']['lng'],
-            'accuracy' => $fullResponse['results'][0]['geometry']['location_type'],
-            'formatted_address' => $fullResponse['results'][0]['formatted_address'],
+            'lat' => $fullResponse->results[0]->geometry->location->lat,
+            'lng' => $fullResponse->results[0]->geometry->location->lng,
+            'accuracy' => $fullResponse->results[0]->geometry->location_type,
+            'formatted_address' => $fullResponse->results[0]->formatted_address,
         ];
     }
 }
