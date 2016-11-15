@@ -2,9 +2,9 @@
 
 All notable changes to `geocoder` will be documented in this file.
 
-## ?.?.? - 2016-11-15
+## 2.3.2 - 2016-11-15
 
-- added Guzzle 6 compatibility
+- require Guzzle 6 instead of 5
 
 ## 2.3.1 - 2016-09-04
 
