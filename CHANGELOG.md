@@ -2,6 +2,10 @@
 
 All notable changes to `geocoder` will be documented in this file.
 
+## ?.?.? - 2016-11-15
+
+- added Guzzle 6 compatibility
+
 ## 2.3.1 - 2016-09-04
 
 - fixed the naming of variables in the `Geocoder` interface
