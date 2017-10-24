@@ -4,8 +4,9 @@ All notable changes to `geocoder` will be documented in this file.
 
 ## 3.0.0 - 2017-10-24
 
-- drop support for PHP 5
+- dropped support for PHP 5
 - cleaned up internals
+- some small API changes
 
 ## 2.3.2 - 2016-11-15
 
