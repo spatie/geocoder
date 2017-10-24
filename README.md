@@ -11,14 +11,6 @@ This PHP package can convert any address to GPS coordinates.
 
 Spatie is a webdesign agency in Antwerp, Belgium. You'll find an overview of all our open source projects [on our website](https://spatie.be/opensource).
 
-## Postcardware
-
-You're free to use this package (it's [MIT-licensed](LICENSE.md)), but if it makes it to your production environment you are required to send us a postcard from your hometown, mentioning which of our package(s) you are using.
-
-Our address is: Spatie, Samberstraat 69D, 2060 Antwerp, Belgium.
-
-The best postcards will get published on the open source page on our website.
-
 ## Installation
 
 You can install this package through composer.
@@ -36,7 +28,7 @@ Install this service provider
 // config/app.php
 'providers' => [
     '...',
-    'Spatie\Geocoder\GeocoderServiceProvider'
+    Spatie\Geocoder\GeocoderServiceProvider::class
 ];
 ```
 
@@ -47,7 +39,7 @@ Geocoder also comes with a facade, which provides an easy way to call the Geocod
 // config/app.php
 'aliases' => array(
 	...
-	'Geocoder' => 'Spatie\Geocoder\GeocoderFacade',
+	'Geocoder' => Spatie\Geocoder\GeocoderFacade::class,
 )
 ```
 
@@ -159,6 +151,14 @@ The accuracy key can contain these values:
 You can read more information about these values [on the Google Geocoding API Page](https://developers.google.com/maps/documentation/geocoding/ "Google Geocoding API")
 
 When an address is not found accuracy and formatted_address will contain `NOT_FOUND`
+
+## Postcardware
+
+You're free to use this package (it's [MIT-licensed](LICENSE.md)), but if it makes it to your production environment you are required to send us a postcard from your hometown, mentioning which of our package(s) you are using.
+
+Our address is: Spatie, Samberstraat 69D, 2060 Antwerp, Belgium.
+
+The best postcards will get published on the open source page on our website.
 
 ## About Spatie
 Spatie is a webdesign agency in Antwerp, Belgium. You'll find an overview of all our open source projects [on our website](https://spatie.be/opensource).
