@@ -36,6 +36,9 @@
             "Spatie\\Geocoder\\Tests\\": "tests"
         }
     },
+    "scripts": {
+        "test": "vendor/bin/phpunit"
+    },
     "minimum-stability": "stable",
     "extra": {
         "laravel": {
