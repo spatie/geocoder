@@ -20,9 +20,9 @@ class GeocoderServiceProvider extends ServiceProvider
 
         $this->app->bind('geocoder', function ($app) {
             return (new Geocoder(new Client))
-                ->setApiKey(config('geocoder.key'))
-                ->setLanguage(config('geocoder.language'))
-                ->setRegion(config('geocoder.region'));
+                ->setApiKey(config('geocoder.key') ?? '')
+                ->setLanguage(config('geocoder.language') ?? '')
+                ->setRegion(config('geocoder.region') ?? '');
         });
     }
 }
