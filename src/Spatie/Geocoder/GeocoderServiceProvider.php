@@ -2,9 +2,9 @@
 
 namespace Spatie\Geocoder;
 
-use Illuminate\Support\ServiceProvider;
-use Spatie\Geocoder\Google\Geocoder;
 use GuzzleHttp\Client;
+use Spatie\Geocoder\Google\Geocoder;
+use Illuminate\Support\ServiceProvider;
 
 class GeocoderServiceProvider extends ServiceProvider
 {
