@@ -7,7 +7,7 @@
 [![StyleCI](https://styleci.io/repos/19355432/shield)](https://styleci.io/repos/19355432)
 [![Total Downloads](https://img.shields.io/packagist/dt/spatie/geocoder.svg?style=flat-square)](https://packagist.org/packages/spatie/geocoder)
 
-This PHP package can convert any address to GPS coordinates. Here's a quick example:
+This package can convert any address to GPS coordinates. Here's a quick example:
 
 ```php
 Geocoder::getCoordinatesForAddress('Samberstraat 69, Antwerpen, Belgium');
