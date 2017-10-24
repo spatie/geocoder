@@ -4,7 +4,7 @@ namespace Spatie\Geocoder\Facades;
 
 use Illuminate\Support\Facades\Facade;
 
-class Geocoder extends Facade
+class GeocoderFacade extends Facade
 {
     /**
      * Get the registered name of the component.

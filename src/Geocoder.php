@@ -4,7 +4,6 @@ namespace Spatie\Geocoder;
 
 use Exception;
 use GuzzleHttp\Client;
-use Spatie\Geocoder\Geocoder as GeocoderInterface;
 
 class Geocoder
 {
@@ -67,7 +66,7 @@ class Geocoder
 
         $geocodingResponse = json_decode($response->getBody());
 
-        if (!count($geocodingResponse->results)) {
+        if (! count($geocodingResponse->results)) {
             return $this->emptyResponse();
         }
 
@@ -77,12 +76,11 @@ class Geocoder
             'accuracy' => $geocodingResponse->results[0]->geometry->location_type,
             'formatted_address' => $geocodingResponse->results[0]->formatted_address,
         ];
-
     }
 
     protected function getRequestPayload(string $address): array
     {
-        $parameters =  array_filter([
+        $parameters = array_filter([
             'address' => $address,
             'key' => $this->apiKey,
             'language' => $this->language,
