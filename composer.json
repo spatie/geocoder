@@ -46,7 +46,7 @@
                 "Spatie\\Geocoder\\GeocoderServiceProvider"
             ],
             "aliases": {
-                "ResponseCache": "Spatie\\Geocoder\\Facades\\Geocoder"
+                "Geocoder": "Spatie\\Geocoder\\Facades\\Geocoder"
             }
         }
     }
