@@ -2,6 +2,11 @@
 
 All notable changes to `geocoder` will be documented in this file.
 
+## 3.0.0 - 2017-10-24
+
+- drop support for PHP 5
+- cleaned up internals
+
 ## 2.3.2 - 2016-11-15
 
 - require Guzzle 6 instead of 5

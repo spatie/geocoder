@@ -21,13 +21,19 @@
         "php": ">=5.4.0",
         "illuminate/support": "^5.0",
         "guzzlehttp/guzzle": "~6.0"
+
     },
     "require-dev": {
-        "phpspec/phpspec": "2.0.*"
+        "phpunit/phpunit": "^6.4"
     },
     "autoload": {
-        "psr-0": {
-            "Spatie\\Geocoder": "src/"
+        "psr-4": {
+            "Spatie\\Geocoder\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Spatie\\Geocoder\\Tests\\": "tests"
         }
     },
     "minimum-stability": "stable",
@@ -37,7 +43,7 @@
                 "Spatie\\Geocoder\\GeocoderServiceProvider"
             ],
             "aliases": {
-                "ResponseCache": "Spatie\\Geocoder\\GeocoderFacade"
+                "ResponseCache": "Spatie\\Geocoder\\Facades\\Geocoder"
             }
         }
     }

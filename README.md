@@ -18,11 +18,11 @@ You can install this package through composer.
 ```bash
 composer require spatie/geocoder
 ```
-## Laravel installation (OPTIONAL)
+## Laravel installation
 
-If you are using this package with Laravel, after installed it through composer, you must:
+Thought the package works fine in non-Laravel projects we included some niceties for our fellow artistans.
 
-Install this service provider
+In Laravel 5.5 the package will autoregister itself. In older versions of Laravel your must manually installed the service provider and facade.
 
 ```php
 // config/app.php
@@ -32,14 +32,11 @@ Install this service provider
 ];
 ```
 
-Geocoder also comes with a facade, which provides an easy way to call the Geocoder, so you have to register it
-
-
 ```php
 // config/app.php
 'aliases' => array(
 	...
-	'Geocoder' => Spatie\Geocoder\GeocoderFacade::class,
+	'Geocoder' => Spatie\Geocoder\Facades\Geocoder::class,
 )
 ```
 
@@ -55,39 +52,24 @@ This is the content of the config file:
 
 return [
 
-    /*
-    |--------------------------------------------------------------------------
-    | Google Maps API key
-    |--------------------------------------------------------------------------
-    |   You need to set the API key, which is required to send requests
-    |   to Google's maps API
-    |   More info: https://developers.google.com/maps/documentation/geocoding/intro#geocoding
-    */
-
-    'key' => env('GOOGLE_MAPS_GEOCODING_API_KEY', ''),
-
-    /*
-    |--------------------------------------------------------------------------
-    | Language param [OPTIONAL]
-    |--------------------------------------------------------------------------
-    |   The language param used to set response translations for textual data
-    |   (e.g. "formatted_address" field).
-    |   More info: https://developers.google.com/maps/faq#languagesupport
-    |
-    */
-
-    'language' => null,
-
-    /*
-    |--------------------------------------------------------------------------
-    | Region param [OPTIONAL]
-    |--------------------------------------------------------------------------
-    |   The region param used to finetune the geocoding process.
-    |   More info: https://developers.google.com/maps/documentation/geocoding/intro#RegionCodes
-    |
-    */
-
-    'region' => null,
+        /*
+         * The api key used when sending Geocoding request to Google.
+         */
+        'key' => env('GOOGLE_MAPS_GEOCODING_API_KEY', ''),
+    
+    
+        /*
+         * The language param used to set response translations for textual data.
+         * More info: https://developers.google.com/maps/faq#languagesupport
+         */
+    
+        'language' => null,
+    
+        /*
+         * The region param used to finetune the geocoding process.
+         * More info: https://developers.google.com/maps/documentation/geocoding/intro#RegionCodes
+         */
+        'region' => null,
 
 ];
 ```
@@ -95,11 +77,14 @@ return [
 
 ## Usage
 
-Here's how you can use the Geocoder
+Here's how you can use the Geocoder.
 
 ```php
-$geocoder = new Geocoder;
-$geocoder->getCoordinatesForQuery('Infinite Loop 1, Cupertino', $apiKey);
+$client = new GuzzleHttp\Client();
+
+$geocoder = new Geocoder($client);
+
+$geocoder->getCoordinatesForAddress('Infinite Loop 1, Cupertino', $apiKey);
 
 /* 
   This function returns an array with keys
@@ -110,14 +95,12 @@ $geocoder->getCoordinatesForQuery('Infinite Loop 1, Cupertino', $apiKey);
 */
 ```
 
-The language and region parameters are very useful in order to obtain the  ù formatted_address` string (into the response), translated into the proper language (English is default), for example:
+You can get the result back in a specific language.
 
 ```php
-$language = 'it';
-$region = 'it';
-
-$geocoder = new Geocoder;
-$geocoder->getCoordinatesForQuery('Infinite Loop 1, Cupertino', $apiKey, $language, $region);
+$geocoder
+   ->getCoordinatesForAddress('Infinite Loop 1, Cupertino')
+   ->setLanguage('it');
 
 /* 
   This function returns an array with keys
@@ -128,10 +111,10 @@ $geocoder->getCoordinatesForQuery('Infinite Loop 1, Cupertino', $apiKey, $langua
 */
 ```
 
-If you are using the package with Laravel, you can simply call  `getCoordinatesForQuery`  on the facade, passing only the query parameter:
+If you are using the package with Laravel, you can simply call `getCoordinatesForAddress`.
 
 ```php
-Geocoder::getCoordinatesForQuery('Infinite Loop 1, Cupertino');
+Geocoder::getCoordinatesForAddress('Infinite Loop 1, Cupertino');
 
 /* 
   This function returns an array with keys
