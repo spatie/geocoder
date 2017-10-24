@@ -29,21 +29,21 @@ class Geocoder
         $this->client = $client;
     }
 
-    public function setApiKey(string $apiKey)
+    public function setApiKey(?string $apiKey)
     {
         $this->apiKey = $apiKey;
 
         return $this;
     }
 
-    public function setLanguage(string $language)
+    public function setLanguage(?string $language)
     {
         $this->language = $language;
 
         return $this;
     }
 
-    public function setRegion(string $region)
+    public function setRegion(?string $region)
     {
         $this->region = $region;
 
