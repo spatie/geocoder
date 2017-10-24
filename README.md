@@ -59,29 +59,28 @@ php artisan vendor:publish --provider="Spatie\Geocoder\GeocoderServiceProvider" 
 This is the content of the config file:
 
 ```php
-
 return [
 
-        /*
-         * The api key used when sending Geocoding request to Google.
-         */
-        'key' => env('GOOGLE_MAPS_GEOCODING_API_KEY', ''),
-    
-    
-        /*
-         * The language param used to set response translations for textual data.
-         *
-         * More info: https://developers.google.com/maps/faq#languagesupport
-         */
-    
-        'language' => null,
-    
-        /*
-         * The region param used to finetune the geocoding process.
-         *
-         * More info: https://developers.google.com/maps/documentation/geocoding/intro#RegionCodes
-         */
-        'region' => null,
+   /*
+    * The api key used when sending Geocoding request to Google.
+    */
+   'key' => env('GOOGLE_MAPS_GEOCODING_API_KEY', ''),
+
+
+   /*
+    * The language param used to set response translations for textual data.
+    *
+    * More info: https://developers.google.com/maps/faq#languagesupport
+    */
+
+   'language' => null,
+
+   /*
+    * The region param used to finetune the geocoding process.
+    *
+    * More info: https://developers.google.com/maps/documentation/geocoding/intro#RegionCodes
+    */
+   'region' => null,
 
 ];
 ```
