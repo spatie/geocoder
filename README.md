@@ -86,7 +86,6 @@ return [
 ];
 ```
 
-
 ## Usage
 
 Here's how you can use the Geocoder.
