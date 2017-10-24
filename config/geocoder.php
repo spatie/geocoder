@@ -3,7 +3,7 @@
 return [
 
     /*
-     * The api key used when sending Geocoding request to Google.
+     * The api key used when sending Geocoding requests to Google.
      */
     'key' => env('GOOGLE_MAPS_GEOCODING_API_KEY', ''),
 
