@@ -56,7 +56,7 @@ class Geocoder
             return $this->emptyResponse();
         }
 
-        $payload = $this->getRequestPayload($address);
+        $payload = $this->getRequestPayload(compact('address'));
 
         $response = $this->client->request('GET', $this->endpoint, $payload);
 
@@ -70,18 +70,43 @@ class Geocoder
             return $this->emptyResponse();
         }
 
+        return $this->formatResponse($geocodingResponse);
+    }
+
+    public function getAddressForCoordinates(float $lat, float $lng): array
+    {
+        $payload = $this->getRequestPayload([
+            'latlng' => "$lat,$lng",
+        ]);
+
+        $response = $this->client->request('GET', $this->endpoint, $payload);
+
+        if ($response->getStatusCode() !== 200) {
+            throw new Exception('could not connect to googleapis.com/maps/api');
+        }
+
+        $reverseGeocodingResponse = json_decode($response->getBody());
+
+        if (! count($reverseGeocodingResponse->results)) {
+            return $this->emptyResponse();
+        }
+
+        return $this->formatResponse($reverseGeocodingResponse);
+    }
+
+    protected function formatResponse($response): array
+    {
         return [
-            'lat' => $geocodingResponse->results[0]->geometry->location->lat,
-            'lng' => $geocodingResponse->results[0]->geometry->location->lng,
-            'accuracy' => $geocodingResponse->results[0]->geometry->location_type,
-            'formatted_address' => $geocodingResponse->results[0]->formatted_address,
+            'lat' => $response->results[0]->geometry->location->lat,
+            'lng' => $response->results[0]->geometry->location->lng,
+            'accuracy' => $response->results[0]->geometry->location_type,
+            'formatted_address' => $response->results[0]->formatted_address,
         ];
     }
 
-    protected function getRequestPayload(string $address): array
+    protected function getRequestPayload(array $parameters): array
     {
-        $parameters = array_filter([
-            'address' => $address,
+        $parameters = array_filter($parameters + [
             'key' => $this->apiKey,
             'language' => $this->language,
             'region' => $this->region,

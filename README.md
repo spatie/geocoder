@@ -121,6 +121,21 @@ $geocoder
 */
 ```
 
+This is how you can reverse geocode coordinates to addresses.
+
+```php
+$geocoder->getAddressForCoordinates(40.714224, -73.961452);
+
+/* 
+  This function returns an array with keys
+  "lat" => 40.7142205
+  "lng" => -73.9612903
+  "accuracy" => "ROOFTOP"
+  "formatted_address" => "277 Bedford Ave, Brooklyn, NY 11211, USA"
+*/
+```
+
+
 If you are using the package with Laravel, you can simply call `getCoordinatesForAddress`.
 
 ```php
