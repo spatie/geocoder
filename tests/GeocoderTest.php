@@ -3,8 +3,8 @@
 namespace Spatie\Geocoder\Tests;
 
 use GuzzleHttp\Client;
-use PHPUnit\Framework\TestCase;
 use Spatie\Geocoder\Geocoder;
+use PHPUnit\Framework\TestCase;
 
 class GeocoderTest extends TestCase
 {
