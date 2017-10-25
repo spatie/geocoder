@@ -55,6 +55,20 @@ class GeocoderTest extends TestCase
         $this->assertEquals('Roma RM, Italia', $result['formatted_address']);
     }
 
+    /** @test */
+    public function it_can_translate_coordinates_to_an_address()
+    {
+        $result = $this->geocoder->getAddressForCoordinates(40.714224, -73.961452);
+
+        $this->assertEquals('277 Bedford Ave, Brooklyn, NY 11211, USA', $result['formatted_address']);
+
+        $result = $this->geocoder
+            ->setLanguage('nl')
+            ->getAddressForCoordinates(40.714224, -73.961452);
+
+        $this->assertEquals('277 Bedford Ave, Brooklyn, NY 11211, Verenigde Staten', $result['formatted_address']);
+    }
+
     protected function emptyResponse(): array
     {
         return [
