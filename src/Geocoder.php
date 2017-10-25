@@ -106,11 +106,11 @@ class Geocoder
 
     protected function getRequestPayload(array $parameters): array
     {
-        $parameters = array_filter($parameters + [
+        $parameters = array_merge([
             'key' => $this->apiKey,
             'language' => $this->language,
             'region' => $this->region,
-        ]);
+        ], $parameters);
 
         return ['query' => $parameters];
     }
