@@ -66,6 +66,10 @@ class Geocoder
 
         $geocodingResponse = json_decode($response->getBody());
 
+        if (!empty($geocodingResponse->error_message)) {
+            throw new \Exception($geocodingResponse->status);
+        }
+
         if (! count($geocodingResponse->results)) {
             return $this->emptyResponse();
         }
@@ -86,6 +90,10 @@ class Geocoder
         }
 
         $reverseGeocodingResponse = json_decode($response->getBody());
+
+        if (!empty($reverseGeocodingResponse->error_message)) {
+            throw new \Exception($reverseGeocodingResponse->status);
+        }
 
         if (! count($reverseGeocodingResponse->results)) {
             return $this->emptyResponse();
