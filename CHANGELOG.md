@@ -2,6 +2,10 @@
 
 All notable changes to `geocoder` will be documented in this file.
 
+## 3.1.1 - 2018-02-21
+
+- improved exception handling
+
 ## 3.1.0 - 2017-10-25
 
 - add `getAddressForCoordinates`

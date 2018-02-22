@@ -4,6 +4,7 @@ namespace Spatie\Geocoder;
 
 use Exception;
 use GuzzleHttp\Client;
+use Spatie\Geocoder\Exceptions\CouldNotGeocode;
 
 class Geocoder
 {
@@ -61,16 +62,16 @@ class Geocoder
         $response = $this->client->request('GET', $this->endpoint, $payload);
 
         if ($response->getStatusCode() !== 200) {
-            throw new Exception('could not connect to googleapis.com/maps/api');
+            throw CouldNotGeocode::couldNotConnect();
         }
 
         $geocodingResponse = json_decode($response->getBody());
 
         if (!empty($geocodingResponse->error_message)) {
-            throw new \Exception($geocodingResponse->status);
+            throw CouldNotGeocode::serviceReturnedError($geocodingResponse->error_message);
         }
 
-        if (! count($geocodingResponse->results)) {
+        if (!count($geocodingResponse->results)) {
             return $this->emptyResponse();
         }
 
@@ -86,16 +87,16 @@ class Geocoder
         $response = $this->client->request('GET', $this->endpoint, $payload);
 
         if ($response->getStatusCode() !== 200) {
-            throw new Exception('could not connect to googleapis.com/maps/api');
+            throw CouldNotGeocode::couldNotConnect();
         }
 
         $reverseGeocodingResponse = json_decode($response->getBody());
 
         if (!empty($reverseGeocodingResponse->error_message)) {
-            throw new \Exception($reverseGeocodingResponse->status);
+            throw CouldNotGeocode::serviceReturnedError($reverseGeocodingResponse->error_message);
         }
 
-        if (! count($reverseGeocodingResponse->results)) {
+        if (!count($reverseGeocodingResponse->results)) {
             return $this->emptyResponse();
         }
 
