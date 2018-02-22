@@ -2,7 +2,6 @@
 
 namespace Spatie\Geocoder;
 
-use Exception;
 use GuzzleHttp\Client;
 use Spatie\Geocoder\Exceptions\CouldNotGeocode;
 
@@ -67,11 +66,11 @@ class Geocoder
 
         $geocodingResponse = json_decode($response->getBody());
 
-        if (!empty($geocodingResponse->error_message)) {
+        if (! empty($geocodingResponse->error_message)) {
             throw CouldNotGeocode::serviceReturnedError($geocodingResponse->error_message);
         }
 
-        if (!count($geocodingResponse->results)) {
+        if (! count($geocodingResponse->results)) {
             return $this->emptyResponse();
         }
 
@@ -92,11 +91,11 @@ class Geocoder
 
         $reverseGeocodingResponse = json_decode($response->getBody());
 
-        if (!empty($reverseGeocodingResponse->error_message)) {
+        if (! empty($reverseGeocodingResponse->error_message)) {
             throw CouldNotGeocode::serviceReturnedError($reverseGeocodingResponse->error_message);
         }
 
-        if (!count($reverseGeocodingResponse->results)) {
+        if (! count($reverseGeocodingResponse->results)) {
             return $this->emptyResponse();
         }
 
