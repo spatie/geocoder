@@ -2,6 +2,10 @@
 
 All notable changes to `geocoder` will be documented in this file.
 
+## 3.2.0 - 2018-03-30
+
+- add viewport coordinates to `Geocoder::formatResponse()`
+
 ## 3.1.1 - 2018-02-21
 
 - improved exception handling
