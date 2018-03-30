@@ -27,6 +27,7 @@ class GeocoderTest extends TestCase
         $this->assertArrayHasKey('lng', $result);
         $this->assertArrayHasKey('accuracy', $result);
         $this->assertArrayHasKey('formatted_address', $result);
+        $this->assertArrayHasKey('viewport', $result);
     }
 
     /** @test */
@@ -76,6 +77,7 @@ class GeocoderTest extends TestCase
             'lng' => 0,
             'accuracy' => Geocoder::RESULT_NOT_FOUND,
             'formatted_address' => Geocoder::RESULT_NOT_FOUND,
+            'viewport' => Geocoder::RESULT_NOT_FOUND,
         ];
     }
 }

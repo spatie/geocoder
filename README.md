@@ -18,6 +18,16 @@ Geocoder::getCoordinatesForAddress('Samberstraat 69, Antwerpen, Belgium');
    'lng' => 4.4286108,,
    'accuracy' => 'ROOFTOP',
    'formatted_address' => 'Samberstraat 69, 2060 Antwerpen, Belgium',
+   'viewport' => [
+       "northeast" => [
+            "lat" => 51.23570538029149,
+            "lng" => 4.429959780291502
+        ],
+        "southwest" => [
+            "lat" => 51.2330074197085,
+            "lng" => 4.427261819708497
+        ]
+   ]
 ]
 ```
 
@@ -101,7 +111,17 @@ $geocoder->getCoordinatesForAddress('Infinite Loop 1, Cupertino', $apiKey);
   "lat" =>  37.331741000000001
   "lng" => -122.0303329
   "accuracy" => "ROOFTOP"
-  "formatted_address" => "1 Infinite Loop, Cupertino, CA 95014, USA"
+  "formatted_address" => "1 Infinite Loop, Cupertino, CA 95014, USA",
+  "viewport" => [
+    "northeast" => [
+      "lat" => 37.3330546802915,
+      "lng" => -122.0294342197085
+    ],
+    "southwest" => [
+      "lat" => 37.3303567197085,
+      "lng" => -122.0321321802915
+    ]
+  ]
 */
 ```
 
@@ -117,7 +137,16 @@ $geocoder
   "lat" =>  37.331741000000001
   "lng" => -122.0303329
   "accuracy" => "ROOFTOP"
-  "formatted_address" => "1 Infinite Loop, Cupertino, CA 95014, Stati Uniti"
+  "viewport" => [
+    "northeast" => [
+      "lat" => 37.3330546802915,
+      "lng" => -122.0294342197085
+    ],
+    "southwest" => [
+      "lat" => 37.3303567197085,
+      "lng" => -122.0321321802915
+    ]
+  ]
 */
 ```
 
@@ -131,7 +160,17 @@ $geocoder->getAddressForCoordinates(40.714224, -73.961452);
   "lat" => 40.7142205
   "lng" => -73.9612903
   "accuracy" => "ROOFTOP"
-  "formatted_address" => "277 Bedford Ave, Brooklyn, NY 11211, USA"
+  "formatted_address" => "277 Bedford Ave, Brooklyn, NY 11211, USA",
+  "viewport" => [
+    "northeast" => [
+      "lat" => 37.3330546802915,
+      "lng" => -122.0294342197085
+    ],
+    "southwest" => [
+      "lat" => 37.3303567197085,
+      "lng" => -122.0321321802915
+    ]
+  ]
 */
 ```
 
@@ -146,7 +185,17 @@ Geocoder::getCoordinatesForAddress('Infinite Loop 1, Cupertino');
   "lat" =>  37.331741000000001
   "lng" => -122.0303329
   "accuracy" => "ROOFTOP"
-  "formatted_address" => "1 Infinite Loop, Cupertino, CA 95014, Stati Uniti"
+  "formatted_address" => "1 Infinite Loop, Cupertino, CA 95014, Stati Uniti",
+    "viewport" => [
+    "northeast" => [
+      "lat" => 37.3330546802915,
+      "lng" => -122.0294342197085
+    ],
+    "southwest" => [
+      "lat" => 37.3303567197085,
+      "lng" => -122.0321321802915
+    ]
+  ]
 */
 ```
 

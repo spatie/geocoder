@@ -110,6 +110,7 @@ class Geocoder
             'lng' => $response->results[0]->geometry->location->lng,
             'accuracy' => $response->results[0]->geometry->location_type,
             'formatted_address' => $response->results[0]->formatted_address,
+            'viewport' => $response->results[0]->geometry->viewport,
         ];
     }
 
@@ -131,6 +132,7 @@ class Geocoder
             'lng' => 0,
             'accuracy' => static::RESULT_NOT_FOUND,
             'formatted_address' => static::RESULT_NOT_FOUND,
+            'viewport' => static::RESULT_NOT_FOUND,
         ];
     }
 }
