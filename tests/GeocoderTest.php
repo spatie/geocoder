@@ -81,6 +81,16 @@ class GeocoderTest extends TestCase
         $this->assertEquals('277 Bedford Ave, Brooklyn, NY 11211, Verenigde Staten', $result['formatted_address']);
     }
 
+    /** @test */
+    public function it_should_prefer_a_neighborhood_inside_of_payload_bounds()
+    {
+        $results = $this->geocoder
+            ->setBounds('34.172684,-118.604794|34.236144,-118.500938')
+            ->getCoordinatesForAddress('Winnetka');
+
+        $this->assertEquals('Winnetka, Los Angeles, CA, USA', $results['formatted_address']);
+    }
+
     protected function emptyResponse(): array
     {
         return [
