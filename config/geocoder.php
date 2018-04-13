@@ -22,4 +22,11 @@ return [
      */
     'region' => '',
 
+    /*
+     * The bounds param used to finetune the geocoding process.
+     *
+     * More info: https://developers.google.com/maps/documentation/geocoding/intro#Viewports
+     */
+    'bounds' => '',
+
 ];
