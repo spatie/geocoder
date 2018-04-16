@@ -4,7 +4,6 @@ namespace Spatie\Geocoder\Tests;
 
 use GuzzleHttp\Client;
 use Spatie\Geocoder\Geocoder;
-use PHPUnit\Framework\TestCase;
 
 class GeocoderTest extends TestCase
 {
@@ -13,9 +12,21 @@ class GeocoderTest extends TestCase
 
     public function setUp()
     {
+        parent::setUp();
+
         $client = new Client();
 
         $this->geocoder = new Geocoder($client);
+
+        $apiKey = env('GOOGLE_API_KEY');
+
+        if (! $apiKey) {
+            $this->markTestSkipped('No Google API key was provided.');
+
+            return;
+        }
+
+        $this->geocoder->setApiKey($apiKey);
     }
 
     /** @test */
