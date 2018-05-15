@@ -2,6 +2,10 @@
 
 All notable changes to `geocoder` will be documented in this file.
 
+## 3.3.1 - 2018-05-15
+
+- fix PHP 7.0 requirement in composer.json
+
 ## 3.3.0 - 2018-04-20
 
 - add support for setting bounds
