@@ -26,6 +26,9 @@ class Geocoder
 
     /** @var string */
     protected $bounds;
+    
+    /** @var string */
+    protected $components;
 
     public function __construct(Client $client)
     {
@@ -56,6 +59,13 @@ class Geocoder
     public function setBounds(string $bounds)
     {
         $this->bounds = $bounds;
+
+        return $this;
+    }
+    
+    public function setComponents(string $components)
+    {
+        $this->components = $components;
 
         return $this;
     }
@@ -130,6 +140,7 @@ class Geocoder
             'language' => $this->language,
             'region' => $this->region,
             'bounds' => $this->bounds,
+            'components' => $this->components,
         ], $parameters);
 
         return ['query' => $parameters];
