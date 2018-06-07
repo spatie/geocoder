@@ -26,7 +26,7 @@ class Geocoder
 
     /** @var string */
     protected $bounds;
-    
+
     /** @var string */
     protected $components;
 
@@ -62,7 +62,7 @@ class Geocoder
 
         return $this;
     }
-    
+
     public function setComponents(string $components)
     {
         $this->components = $components;
