@@ -90,6 +90,16 @@ class GeocoderTest extends TestCase
 
         $this->assertEquals('Winnetka, Los Angeles, CA, USA', $results['formatted_address']);
     }
+    
+    /** @test */
+    public function it_should_prefer_an_address_restricted_to_a_specific_area()
+    {
+        $results = $this->geocoder
+            ->setComponents('components=country:GB')
+            ->getCoordinatesForAddress('high st hasting');
+
+        $this->assertEquals('High St, Hastings TN34 3EY, UK', $results['formatted_address']);
+    }
 
     protected function emptyResponse(): array
     {
