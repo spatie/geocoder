@@ -90,7 +90,7 @@ class GeocoderTest extends TestCase
 
         $this->assertEquals('Winnetka, Los Angeles, CA, USA', $results['formatted_address']);
     }
-    
+
     /** @test */
     public function it_should_prefer_an_address_restricted_to_a_specific_area()
     {
