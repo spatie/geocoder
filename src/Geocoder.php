@@ -137,32 +137,29 @@ class Geocoder
             'lng' => $response->results[0]->geometry->location->lng,
             'accuracy' => $response->results[0]->geometry->location_type,
             'formatted_address' => $response->results[0]->formatted_address,
-            'viewport' => $response->results[0]->geometry->viewport
+            'viewport' => $response->results[0]->geometry->viewport,
         ];
     }
 
     protected function formatResponseWithAddressComponents($response): array
     {
-        if($response->results[0]->geometry->location_type == 'ROOFTOP')
-        {
+        if($response->results[0]->geometry->location_type == 'ROOFTOP') {
             return [
                 'lat' => $response->results[0]->geometry->location->lat,
                 'lng' => $response->results[0]->geometry->location->lng,
                 'accuracy' => $response->results[0]->geometry->location_type,
                 'formatted_address' => $response->results[0]->formatted_address,
                 'viewport' => $response->results[0]->geometry->viewport,
-                'address_components' => $response->results[0]->address_components
+                'address_components' => $response->results[0]->address_components,
             ];
-        }
-        else
-        {
+        } else {
             return [
                 'lat' => $response->results[0]->geometry->location->lat,
                 'lng' => $response->results[0]->geometry->location->lng,
                 'accuracy' => $response->results[0]->geometry->location_type,
                 'formatted_address' => $response->results[0]->formatted_address,
                 'viewport' => $response->results[0]->geometry->viewport,
-                'address_components' => null
+                'address_components' => null,
             ];
         }
     }
@@ -181,7 +178,7 @@ class Geocoder
 
     protected function emptyResponse(): array
     {
-        if($this->addressComponents) {
+        if ($this->addressComponents) {
             return [
                 'lat' => 0,
                 'lng' => 0,
