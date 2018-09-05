@@ -114,13 +114,28 @@ class Geocoder
 
     protected function formatResponse($response): array
     {
-        return [
-            'lat' => $response->results[0]->geometry->location->lat,
-            'lng' => $response->results[0]->geometry->location->lng,
-            'accuracy' => $response->results[0]->geometry->location_type,
-            'formatted_address' => $response->results[0]->formatted_address,
-            'viewport' => $response->results[0]->geometry->viewport,
-        ];
+        if($response->results[0]->geometry->location_type == 'ROOFTOP')
+        {
+            return [
+                'address_components' => $response->results[0]->address_components,
+                'lat' => $response->results[0]->geometry->location->lat,
+                'lng' => $response->results[0]->geometry->location->lng,
+                'accuracy' => $response->results[0]->geometry->location_type,
+                'formatted_address' => $response->results[0]->formatted_address,
+                'viewport' => $response->results[0]->geometry->viewport
+            ];
+        }
+        else
+        {
+            return [
+                'lat' => $response->results[0]->geometry->location->lat,
+                'lng' => $response->results[0]->geometry->location->lng,
+                'accuracy' => $response->results[0]->geometry->location_type,
+                'formatted_address' => $response->results[0]->formatted_address,
+                'viewport' => $response->results[0]->geometry->viewport
+            ];
+        }
+
     }
 
     protected function getRequestPayload(array $parameters): array
