@@ -143,7 +143,7 @@ class Geocoder
 
     protected function formatResponseWithAddressComponents($response): array
     {
-        if($response->results[0]->geometry->location_type == 'ROOFTOP') {
+        if ($response->results[0]->geometry->location_type == 'ROOFTOP') {
             return [
                 'lat' => $response->results[0]->geometry->location->lat,
                 'lng' => $response->results[0]->geometry->location->lng,
