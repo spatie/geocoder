@@ -27,6 +27,9 @@ class Geocoder
     /** @var string */
     protected $bounds;
 
+    /** @var bool */
+    protected $addressComponents;
+
     public function __construct(Client $client)
     {
         $this->client = $client;
@@ -60,6 +63,13 @@ class Geocoder
         return $this;
     }
 
+    public function withAddressComponents()
+    {
+        $this->addressComponents = true;
+
+        return $this;
+    }
+
     public function getCoordinatesForAddress(string $address): array
     {
         if (empty($address)) {
@@ -84,7 +94,11 @@ class Geocoder
             return $this->emptyResponse();
         }
 
-        return $this->formatResponse($geocodingResponse);
+        if ($this->addressComponents) {
+            return $this->formatResponseWithAddressComponents($geocodingResponse);
+        } else {
+            return $this->formatResponse($geocodingResponse);
+        }
     }
 
     public function getAddressForCoordinates(float $lat, float $lng): array
@@ -109,7 +123,11 @@ class Geocoder
             return $this->emptyResponse();
         }
 
-        return $this->formatResponse($reverseGeocodingResponse);
+        if ($this->addressComponents) {
+            return $this->formatResponseWithAddressComponents($reverseGeocodingResponse);
+        } else {
+            return $this->formatResponse($reverseGeocodingResponse);
+        }
     }
 
     protected function formatResponse($response): array
@@ -119,8 +137,34 @@ class Geocoder
             'lng' => $response->results[0]->geometry->location->lng,
             'accuracy' => $response->results[0]->geometry->location_type,
             'formatted_address' => $response->results[0]->formatted_address,
-            'viewport' => $response->results[0]->geometry->viewport,
+            'viewport' => $response->results[0]->geometry->viewport
         ];
+    }
+
+    protected function formatResponseWithAddressComponents($response): array
+    {
+        if($response->results[0]->geometry->location_type == 'ROOFTOP')
+        {
+            return [
+                'lat' => $response->results[0]->geometry->location->lat,
+                'lng' => $response->results[0]->geometry->location->lng,
+                'accuracy' => $response->results[0]->geometry->location_type,
+                'formatted_address' => $response->results[0]->formatted_address,
+                'viewport' => $response->results[0]->geometry->viewport,
+                'address_components' => $response->results[0]->address_components
+            ];
+        }
+        else
+        {
+            return [
+                'lat' => $response->results[0]->geometry->location->lat,
+                'lng' => $response->results[0]->geometry->location->lng,
+                'accuracy' => $response->results[0]->geometry->location_type,
+                'formatted_address' => $response->results[0]->formatted_address,
+                'viewport' => $response->results[0]->geometry->viewport,
+                'address_components' => null
+            ];
+        }
     }
 
     protected function getRequestPayload(array $parameters): array
@@ -137,12 +181,23 @@ class Geocoder
 
     protected function emptyResponse(): array
     {
-        return [
-            'lat' => 0,
-            'lng' => 0,
-            'accuracy' => static::RESULT_NOT_FOUND,
-            'formatted_address' => static::RESULT_NOT_FOUND,
-            'viewport' => static::RESULT_NOT_FOUND,
-        ];
+        if($this->addressComponents) {
+            return [
+                'lat' => 0,
+                'lng' => 0,
+                'accuracy' => static::RESULT_NOT_FOUND,
+                'formatted_address' => static::RESULT_NOT_FOUND,
+                'viewport' => static::RESULT_NOT_FOUND,
+                'address_components' => static::RESULT_NOT_FOUND,
+            ];
+        } else {
+            return [
+                'lat' => 0,
+                'lng' => 0,
+                'accuracy' => static::RESULT_NOT_FOUND,
+                'formatted_address' => static::RESULT_NOT_FOUND,
+                'viewport' => static::RESULT_NOT_FOUND,
+            ];
+        }
     }
 }
