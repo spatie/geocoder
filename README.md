@@ -98,6 +98,13 @@ return [
      * More info: https://developers.google.com/maps/documentation/geocoding/intro#Viewports
      */
     'bounds' => '',
+    
+    /*
+     * The address_components param used to determine if you want to return address_components when a ROOFTOP match is found.
+     *
+     * More info: https://developers.google.com/maps/documentation/geocoding/intro#Types
+     */
+    'address_components' => true,
 
 ];
 ```
@@ -215,6 +222,94 @@ The accuracy key can contain these values:
 You can read more information about these values [on the Google Geocoding API Page](https://developers.google.com/maps/documentation/geocoding/ "Google Geocoding API")
 
 When an address is not found accuracy and formatted_address will contain `NOT_FOUND`
+
+If you set the `address_components` variable to `true` in the config file, address_components will be added for every `ROOFTOP` match
+
+```php
+$geocoder->getAddressForCoordinates(40.714224, -73.961452);
+
+/* 
+  With 'address_components' set to true, this function returns an array with keys
+   "lat" => 40.7142205,
+   "lng" => -73.9612903,
+   "accuracy" => "ROOFTOP",
+   "formatted_address" => "277 Bedford Ave, Brooklyn, NY 11211, USA",
+   "viewport" => {#3206
+     +"northeast": {#3207
+       +"lat": 40.715569480291,
+       +"lng": -73.959941319708,
+     },
+     +"southwest": {#3208
+       +"lat": 40.712871519709,
+       +"lng": -73.962639280291,
+     },
+   },
+   "address_components" => [
+     {#3205
+       +"long_name": "277",
+       +"short_name": "277",
+       +"types": [
+         "street_number",
+       ],
+     },
+     {#3200
+       +"long_name": "Bedford Avenue",
+       +"short_name": "Bedford Ave",
+       +"types": [
+         "route",
+       ],
+     },
+     {#3197
+       +"long_name": "Williamsburg",
+       +"short_name": "Williamsburg",
+       +"types": [
+         "neighborhood",
+         "political",
+       ],
+     },
+     {#3202
+       +"long_name": "Brooklyn",
+       +"short_name": "Brooklyn",
+       +"types": [
+         "political",
+         "sublocality",
+         "sublocality_level_1",
+       ],
+     },
+     {#3204
+       +"long_name": "Kings County",
+       +"short_name": "Kings County",
+       +"types": [
+         "administrative_area_level_2",
+         "political",
+       ],
+     },
+     {#3159
+       +"long_name": "New York",
+       +"short_name": "NY",
+       +"types": [
+         "administrative_area_level_1",
+         "political",
+       ],
+     },
+     {#3184
+       +"long_name": "United States",
+       +"short_name": "US",
+       +"types": [
+         "country",
+         "political",
+       ],
+     },
+     {#3191
+       +"long_name": "11211",
+       +"short_name": "11211",
+       +"types": [
+         "postal_code",
+       ],
+     },
+   ]
+*/
+```
 
 ## Postcardware
 

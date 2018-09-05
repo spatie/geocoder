@@ -29,4 +29,11 @@ return [
      */
     'bounds' => '',
 
+    /*
+     * The address_components param used to determine if you want to return address_components when a ROOFTOP match is found.
+     *
+     * More info: https://developers.google.com/maps/documentation/geocoding/intro#Types
+     */
+    'address_components' => false,
+
 ];
