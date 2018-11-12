@@ -111,7 +111,9 @@ $client = new GuzzleHttp\Client();
 
 $geocoder = new Geocoder($client);
 
-$geocoder->getCoordinatesForAddress('Infinite Loop 1, Cupertino', $apiKey);
+$geocoder->setApiKey(config('geocoder.key'));
+
+$geocoder->getCoordinatesForAddress('Infinite Loop 1, Cupertino');
 
 /* 
   This function returns an array with keys
