@@ -111,9 +111,11 @@ $client = new GuzzleHttp\Client();
 
 $geocoder = new Geocoder($client);
 
-$geocoder->getCoordinatesForAddress('Infinite Loop 1, Cupertino', $apiKey);
+$geocoder->setApiKey(config('geocoder.key'));
 
-/* 
+$geocoder->getCoordinatesForAddress('Infinite Loop 1, Cupertino');
+
+/*
   This function returns an array with keys
   "lat" =>  37.331741000000001
   "lng" => -122.0303329
@@ -139,7 +141,7 @@ $geocoder
    ->getCoordinatesForAddress('Infinite Loop 1, Cupertino')
    ->setLanguage('it');
 
-/* 
+/*
   This function returns an array with keys
   "lat" =>  37.331741000000001
   "lng" => -122.0303329
@@ -162,7 +164,7 @@ This is how you can reverse geocode coordinates to addresses.
 ```php
 $geocoder->getAddressForCoordinates(40.714224, -73.961452);
 
-/* 
+/*
   This function returns an array with keys
   "lat" => 40.7142205
   "lng" => -73.9612903
@@ -187,7 +189,7 @@ If you are using the package with Laravel, you can simply call `getCoordinatesFo
 ```php
 Geocoder::getCoordinatesForAddress('Infinite Loop 1, Cupertino');
 
-/* 
+/*
   This function returns an array with keys
   "lat" =>  37.331741000000001
   "lng" => -122.0303329
@@ -233,7 +235,7 @@ We publish all received postcards [on our company website](https://spatie.be/en/
 
 Spatie is a webdesign agency based in Antwerp, Belgium. You'll find an overview of all our open source projects [on our website](https://spatie.be/opensource).
 
-Does your business depend on our contributions? Reach out and support us on [Patreon](https://www.patreon.com/spatie). 
+Does your business depend on our contributions? Reach out and support us on [Patreon](https://www.patreon.com/spatie).
 All pledges will be dedicated to allocating workforce on maintenance and new awesome stuff.
 
 ## License
