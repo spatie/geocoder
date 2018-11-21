@@ -107,7 +107,7 @@ return [
 Here's how you can use the Geocoder.
 
 ```php
-$client = new GuzzleHttp\Client();
+$client = new \GuzzleHttp\Client();
 
 $geocoder = new Geocoder($client);
 
