@@ -125,7 +125,7 @@ class Geocoder
     protected function formatResponse($response): array
     {
 
-        $formattedResponse =  [
+        $formattedResponse = [
             'lat' => $response->results[0]->geometry->location->lat,
             'lng' => $response->results[0]->geometry->location->lng,
             'accuracy' => $response->results[0]->geometry->location_type,
@@ -133,7 +133,7 @@ class Geocoder
             'viewport' => $response->results[0]->geometry->viewport,
         ];
 
-        if($this->withAddressComponents){
+        if ($this->withAddressComponents){
             $formattedResponse['address_components'] = $response->results[0]->address_components;
         }
 
