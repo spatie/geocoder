@@ -27,9 +27,6 @@ class Geocoder
     /** @var string */
     protected $bounds;
 
-    /** @var bool */
-    protected $withAddressComponents;
-
     public function __construct(Client $client)
     {
         $this->client = $client;
@@ -59,13 +56,6 @@ class Geocoder
     public function setBounds(string $bounds)
     {
         $this->bounds = $bounds;
-
-        return $this;
-    }
-
-    public function includeAddressComponents()
-    {
-        $this->withAddressComponents = true;
 
         return $this;
     }
@@ -124,19 +114,14 @@ class Geocoder
 
     protected function formatResponse($response): array
     {
-        $formattedResponse = [
+        return [
             'lat' => $response->results[0]->geometry->location->lat,
             'lng' => $response->results[0]->geometry->location->lng,
             'accuracy' => $response->results[0]->geometry->location_type,
             'formatted_address' => $response->results[0]->formatted_address,
             'viewport' => $response->results[0]->geometry->viewport,
+            'address_components' => $response->results[0]->address_components,
         ];
-
-        if ($this->withAddressComponents) {
-            $formattedResponse['address_components'] = $response->results[0]->address_components;
-        }
-
-        return $formattedResponse;
     }
 
     protected function getRequestPayload(array $parameters): array

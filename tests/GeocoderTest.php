@@ -84,9 +84,7 @@ class GeocoderTest extends TestCase
     /** @test */
     public function it_can_include_the_address_components_in_a_response()
     {
-        $results = $this->geocoder
-            ->includeAddressComponents()
-            ->getCoordinatesForAddress('277 Bedford Ave, Brooklyn, NY 11211, Verenigde Staten');
+        $results = $this->geocoder->getCoordinatesForAddress('Infinite Loop 1, Cupertino');
 
         $this->assertArrayHasKey('address_components', $results);
     }
