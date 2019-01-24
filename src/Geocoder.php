@@ -120,6 +120,8 @@ class Geocoder
             'accuracy' => $response->results[0]->geometry->location_type,
             'formatted_address' => $response->results[0]->formatted_address,
             'viewport' => $response->results[0]->geometry->viewport,
+            'address_components' => $response->results[0]->address_components,
+            'place_id' => $response->results[0]->place_id,
         ];
     }
 

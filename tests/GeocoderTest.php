@@ -82,6 +82,22 @@ class GeocoderTest extends TestCase
     }
 
     /** @test */
+    public function it_can_include_the_address_components_in_a_response()
+    {
+        $results = $this->geocoder->getCoordinatesForAddress('Infinite Loop 1, Cupertino');
+
+        $this->assertArrayHasKey('address_components', $results);
+    }
+
+    /** @test */
+    public function it_includes_the_place_id_in_a_response()
+    {
+        $results = $this->geocoder->getCoordinatesForAddress('Infinite Loop 1, Cupertino');
+
+        $this->assertArrayHasKey('place_id', $results);
+    }
+
+    /** @test */
     public function it_should_prefer_a_neighborhood_inside_of_payload_bounds()
     {
         $results = $this->geocoder
