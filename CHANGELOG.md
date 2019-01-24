@@ -2,6 +2,10 @@
 
 All notable changes to `geocoder` will be documented in this file.
 
+## 3.4.0 - 2018-01-24
+
+- include address components in the response
+
 ## 3.3.1 - 2018-05-15
 
 - fix PHP 7.0 requirement in composer.json
