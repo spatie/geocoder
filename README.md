@@ -15,7 +15,7 @@ Geocoder::getCoordinatesForAddress('Samberstraat 69, Antwerpen, Belgium');
 // will return this array
 [
    'lat' => 51.2343564,
-   'lng' => 4.4286108,,
+   'lng' => 4.4286108,
    'accuracy' => 'ROOFTOP',
    'formatted_address' => 'Samberstraat 69, 2060 Antwerpen, Belgium',
    'viewport' => [
