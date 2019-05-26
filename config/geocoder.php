@@ -28,5 +28,12 @@ return [
      * More info: https://developers.google.com/maps/documentation/geocoding/intro#Viewports
      */
     'bounds' => '',
+    
+    /*
+     * The country param used to limit results to a specific Country by its code
+     *
+     * More info: https://developers.google.com/maps/documentation/javascript/geocoding#GeocodingRequests
+     */
+    'country' => '',
 
 ];
