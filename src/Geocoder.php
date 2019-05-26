@@ -65,7 +65,7 @@ class Geocoder
 
     public function setCountry(string $country)
     {
-        $this->country= $country;
+        $this->country = $country;
 
         return $this;
     }
