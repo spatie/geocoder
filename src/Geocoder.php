@@ -145,7 +145,10 @@ class Geocoder
         ], $parameters);
 
         if ($this->country) {
-            $parameters = array_merge($parameters, ['components' => 'country:'.$this->country]);
+            $parameters = array_merge(
+                $parameters,
+                ['components' => 'country:'.$this->country]
+            );
         }
 
         return ['query' => $parameters];

@@ -2,6 +2,11 @@
 
 All notable changes to `geocoder` will be documented in this file.
 
+## 3.5.0 - 2019-05-31
+
+- add country parameter
+- drop support for PHP 7.1 and smaller
+
 ## 3.4.0 - 2018-01-24
 
 - include address components in the response

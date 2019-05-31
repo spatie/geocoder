@@ -10,7 +10,7 @@ class GeocoderTest extends TestCase
     /** @var \Spatie\Geocoder\Geocoder */
     protected $geocoder;
 
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
 
