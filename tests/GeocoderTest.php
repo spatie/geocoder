@@ -72,13 +72,13 @@ class GeocoderTest extends TestCase
     {
         $result = $this->geocoder->getAddressForCoordinates(40.714224, -73.961452);
 
-        $this->assertEquals('277 Bedford Ave, Brooklyn, NY 11211, USA', $result['formatted_address']);
+        $this->assertEquals('279 Bedford Ave, Brooklyn, NY 11211, USA', $result['formatted_address']);
 
         $result = $this->geocoder
             ->setLanguage('nl')
             ->getAddressForCoordinates(40.714224, -73.961452);
 
-        $this->assertEquals('277 Bedford Ave, Brooklyn, NY 11211, Verenigde Staten', $result['formatted_address']);
+        $this->assertEquals('279 Bedford Ave, Brooklyn, NY 11211, Verenigde Staten', $result['formatted_address']);
     }
 
     /** @test */
