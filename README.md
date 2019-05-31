@@ -98,7 +98,13 @@ return [
      * More info: https://developers.google.com/maps/documentation/geocoding/intro#Viewports
      */
     'bounds' => '',
-
+    
+     /*
+     * The country param used to limit results to a specific Country by its code
+     *
+     * More info: https://developers.google.com/maps/documentation/javascript/geocoding#GeocodingRequests
+     */
+    'country' => '',
 ];
 ```
 
@@ -112,6 +118,8 @@ $client = new \GuzzleHttp\Client();
 $geocoder = new Geocoder($client);
 
 $geocoder->setApiKey(config('geocoder.key'));
+
+$geocoder->setCountry(config('US');
 
 $geocoder->getCoordinatesForAddress('Infinite Loop 1, Cupertino');
 
