@@ -56,13 +56,13 @@ class GeocoderTest extends TestCase
     /** @test */
     public function it_can_translate_the_data()
     {
-        $result = $this->geocoder->getCoordinatesForAddress('Roma');
+        $result = $this->geocoder->getCoordinatesForAddress('Roma, Italy');
 
         $this->assertEquals('Rome, Metropolitan City of Rome, Italy', $result['formatted_address']);
 
         $result = $this->geocoder
             ->setLanguage('it')
-            ->getCoordinatesForAddress('Roma');
+            ->getCoordinatesForAddress('Roma, Italy');
 
         $this->assertEquals('Roma RM, Italia', $result['formatted_address']);
     }
