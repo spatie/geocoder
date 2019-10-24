@@ -119,7 +119,7 @@ $geocoder = new Geocoder($client);
 
 $geocoder->setApiKey(config('geocoder.key'));
 
-$geocoder->setCountry(config('US');
+$geocoder->setCountry(config('US'));
 
 $geocoder->getCoordinatesForAddress('Infinite Loop 1, Cupertino');
 
