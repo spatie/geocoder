@@ -40,9 +40,9 @@ composer require spatie/geocoder
 ```
 ## Laravel installation
 
-Thought the package works fine in non-Laravel projects we included some niceties for our fellow artistans.
+Though the package works fine in non-Laravel projects we included some niceties for our fellow artistans.
 
-In Laravel 5.5 the package will autoregister itself. In older versions of Laravel your must manually installed the service provider and facade.
+In Laravel 5.5 the package will autoregister itself. In older versions of Laravel you must manually install the service provider and facade.
 
 ```php
 // config/app.php
