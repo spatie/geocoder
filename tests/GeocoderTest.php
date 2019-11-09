@@ -3,6 +3,7 @@
 namespace Spatie\Geocoder\Tests;
 
 use GuzzleHttp\Client;
+use Illuminate\Support\Collection;
 use Spatie\Geocoder\Geocoder;
 
 class GeocoderTest extends TestCase
@@ -34,11 +35,11 @@ class GeocoderTest extends TestCase
     {
         $result = $this->geocoder->getCoordinatesForAddress('Antwerp');
 
-        $this->assertArrayHasKey('lat', $result);
-        $this->assertArrayHasKey('lng', $result);
-        $this->assertArrayHasKey('accuracy', $result);
-        $this->assertArrayHasKey('formatted_address', $result);
-        $this->assertArrayHasKey('viewport', $result);
+        $this->assertArrayHasKey('lat', $result->first());
+        $this->assertArrayHasKey('lng', $result->first());
+        $this->assertArrayHasKey('accuracy', $result->first());
+        $this->assertArrayHasKey('formatted_address', $result->first());
+        $this->assertArrayHasKey('viewport', $result->first());
     }
 
     /** @test */
@@ -58,13 +59,13 @@ class GeocoderTest extends TestCase
     {
         $result = $this->geocoder->getCoordinatesForAddress('Roma, Italy');
 
-        $this->assertEquals('Rome, Metropolitan City of Rome, Italy', $result['formatted_address']);
+        $this->assertEquals('Rome, Metropolitan City of Rome, Italy', $result->first()['formatted_address']);
 
         $result = $this->geocoder
             ->setLanguage('it')
             ->getCoordinatesForAddress('Roma, Italy');
 
-        $this->assertEquals('Roma RM, Italia', $result['formatted_address']);
+        $this->assertEquals('Roma RM, Italia', $result->first()['formatted_address']);
     }
 
     /** @test */
@@ -72,13 +73,13 @@ class GeocoderTest extends TestCase
     {
         $result = $this->geocoder->getAddressForCoordinates(40.714224, -73.961452);
 
-        $this->assertEquals('279 Bedford Ave, Brooklyn, NY 11211, USA', $result['formatted_address']);
+        $this->assertEquals('279 Bedford Ave, Brooklyn, NY 11211, USA', $result->first()['formatted_address']);
 
         $result = $this->geocoder
             ->setLanguage('nl')
             ->getAddressForCoordinates(40.714224, -73.961452);
 
-        $this->assertEquals('279 Bedford Ave, Brooklyn, NY 11211, Verenigde Staten', $result['formatted_address']);
+        $this->assertEquals('279 Bedford Ave, Brooklyn, NY 11211, Verenigde Staten', $result->first()['formatted_address']);
     }
 
     /** @test */
@@ -86,7 +87,7 @@ class GeocoderTest extends TestCase
     {
         $results = $this->geocoder->getCoordinatesForAddress('Infinite Loop 1, Cupertino');
 
-        $this->assertArrayHasKey('address_components', $results);
+        $this->assertArrayHasKey('address_components', $results->first());
     }
 
     /** @test */
@@ -94,7 +95,7 @@ class GeocoderTest extends TestCase
     {
         $results = $this->geocoder->getCoordinatesForAddress('Infinite Loop 1, Cupertino');
 
-        $this->assertArrayHasKey('place_id', $results);
+        $this->assertArrayHasKey('place_id', $results->first());
     }
 
     /** @test */
@@ -104,17 +105,17 @@ class GeocoderTest extends TestCase
             ->setBounds('34.172684,-118.604794|34.236144,-118.500938')
             ->getCoordinatesForAddress('Winnetka');
 
-        $this->assertEquals('Winnetka, Los Angeles, CA, USA', $results['formatted_address']);
+        $this->assertEquals('Winnetka, Los Angeles, CA, USA', $results->first()['formatted_address']);
     }
 
-    protected function emptyResponse(): array
+    protected function emptyResponse(): Collection
     {
-        return [
+        return new Collection([
             'lat' => 0,
             'lng' => 0,
             'accuracy' => Geocoder::RESULT_NOT_FOUND,
             'formatted_address' => Geocoder::RESULT_NOT_FOUND,
             'viewport' => Geocoder::RESULT_NOT_FOUND,
-        ];
+        ]);
     }
 }
