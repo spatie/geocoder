@@ -91,7 +91,7 @@ class Geocoder
         }
 
         if (! count($geocodingResponse->results)) {
-            return $this->emptyResponse()->first();;
+            return $this->emptyResponse()->first();
         }
 
         return $this->formatResponse($geocodingResponse)->first();
