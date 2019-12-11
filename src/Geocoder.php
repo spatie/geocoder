@@ -3,6 +3,7 @@
 namespace Spatie\Geocoder;
 
 use GuzzleHttp\Client;
+use Illuminate\Support\Collection;
 use Spatie\Geocoder\Exceptions\CouldNotGeocode;
 
 class Geocoder
@@ -73,11 +74,36 @@ class Geocoder
     public function getCoordinatesForAddress(string $address): array
     {
         if (empty($address)) {
+            return $this->emptyResponse()->first();
+        }
+
+        $payload = $this->getRequestPayload(compact('address'));
+        $response = $this->client->request('GET', $this->endpoint, $payload);
+
+        if ($response->getStatusCode() !== 200) {
+            throw CouldNotGeocode::couldNotConnect();
+        }
+
+        $geocodingResponse = json_decode($response->getBody());
+
+        if (! empty($geocodingResponse->error_message)) {
+            throw CouldNotGeocode::serviceReturnedError($geocodingResponse->error_message);
+        }
+
+        if (! count($geocodingResponse->results)) {
+            return $this->emptyResponse()->first();;
+        }
+
+        return $this->formatResponse($geocodingResponse)->first();
+    }
+
+    public function getAllCoordinatesForAddress(string $address): Collection
+    {
+        if (empty($address)) {
             return $this->emptyResponse();
         }
 
         $payload = $this->getRequestPayload(compact('address'));
-
         $response = $this->client->request('GET', $this->endpoint, $payload);
 
         if ($response->getStatusCode() !== 200) {
@@ -102,37 +128,37 @@ class Geocoder
         $payload = $this->getRequestPayload([
             'latlng' => "$lat,$lng",
         ]);
-
         $response = $this->client->request('GET', $this->endpoint, $payload);
-
         if ($response->getStatusCode() !== 200) {
             throw CouldNotGeocode::couldNotConnect();
         }
-
         $reverseGeocodingResponse = json_decode($response->getBody());
-
         if (! empty($reverseGeocodingResponse->error_message)) {
             throw CouldNotGeocode::serviceReturnedError($reverseGeocodingResponse->error_message);
         }
-
         if (! count($reverseGeocodingResponse->results)) {
-            return $this->emptyResponse();
+            return $this->emptyResponse()->first();
         }
-
-        return $this->formatResponse($reverseGeocodingResponse);
+        return $this->formatResponse($reverseGeocodingResponse)->first();
     }
 
-    protected function formatResponse($response): array
+    protected function formatResponse($response): Collection
     {
-        return [
-            'lat' => $response->results[0]->geometry->location->lat,
-            'lng' => $response->results[0]->geometry->location->lng,
-            'accuracy' => $response->results[0]->geometry->location_type,
-            'formatted_address' => $response->results[0]->formatted_address,
-            'viewport' => $response->results[0]->geometry->viewport,
-            'address_components' => $response->results[0]->address_components,
-            'place_id' => $response->results[0]->place_id,
-        ];
+        $locations = new Collection;
+
+        foreach($response->results as $result) {
+            $locations->push([
+                'lat' => $result->geometry->location->lat,
+                'lng' => $result->geometry->location->lng,
+                'accuracy' => $result->geometry->location_type,
+                'formatted_address' => $result->formatted_address,
+                'viewport' => $result->geometry->viewport,
+                'address_components' => $result->address_components,
+                'place_id' => $result->place_id,
+            ]);
+        }
+
+        return $locations;
     }
 
     protected function getRequestPayload(array $parameters): array
@@ -154,14 +180,14 @@ class Geocoder
         return ['query' => $parameters];
     }
 
-    protected function emptyResponse(): array
+    protected function emptyResponse(): Collection
     {
-        return [
+        return new Collection([
             'lat' => 0,
             'lng' => 0,
             'accuracy' => static::RESULT_NOT_FOUND,
             'formatted_address' => static::RESULT_NOT_FOUND,
             'viewport' => static::RESULT_NOT_FOUND,
-        ];
+        ]);
     }
 }
