@@ -183,11 +183,13 @@ class Geocoder
     protected function emptyResponse(): Collection
     {
         return new Collection([
+          [
             'lat' => 0,
             'lng' => 0,
             'accuracy' => static::RESULT_NOT_FOUND,
             'formatted_address' => static::RESULT_NOT_FOUND,
             'viewport' => static::RESULT_NOT_FOUND,
+          ],
         ]);
     }
 }

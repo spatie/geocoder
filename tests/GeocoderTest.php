@@ -4,6 +4,7 @@ namespace Spatie\Geocoder\Tests;
 
 use GuzzleHttp\Client;
 use Spatie\Geocoder\Geocoder;
+use Illuminate\Support\Collection;
 
 class GeocoderTest extends TestCase
 {
@@ -42,9 +43,27 @@ class GeocoderTest extends TestCase
     }
 
     /** @test */
+    public function it_can_geocode_a_city_with_multiple_responses()
+    {
+        $results = $this->geocoder->getAllCoordinatesForAddress('Washingtons');
+
+        $this->assertInstanceOf(Collection::class, $results);
+        $this->assertTrue($results->count() > 1);
+
+        $result = $results->first();
+
+        $this->assertArrayHasKey('lat', $result);
+        $this->assertArrayHasKey('lng', $result);
+        $this->assertArrayHasKey('accuracy', $result);
+        $this->assertArrayHasKey('formatted_address', $result);
+        $this->assertArrayHasKey('viewport', $result);
+    }
+
+    /** @test */
     public function it_should_return_an_empty_response_when_called_with_empty_query()
     {
         $this->assertEquals($this->emptyResponse(), $this->geocoder->getCoordinatesForAddress(''));
+
     }
 
     /** @test */
