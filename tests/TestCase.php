@@ -20,7 +20,7 @@ class TestCase extends PHPUnitTestCase
             return;
         }
 
-        $dotenv = new Dotenv(__DIR__.'/..');
+        $dotenv = Dotenv::create(__DIR__.'/..');
 
         $dotenv->load();
     }
