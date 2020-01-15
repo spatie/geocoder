@@ -3,9 +3,9 @@
 namespace Spatie\Geocoder\Tests;
 
 use Dotenv\Dotenv;
-use PHPUnit\Framework\TestCase as PHPUnitTestCase;
+use Orchestra\Testbench\TestCase as Orchestra;
 
-class TestCase extends PHPUnitTestCase
+class TestCase extends Orchestra
 {
     protected function setUp(): void
     {
@@ -16,12 +16,28 @@ class TestCase extends PHPUnitTestCase
 
     protected function loadEnvironmentVariables()
     {
-        if (! file_exists(__DIR__.'/../.env')) {
+        if (!file_exists(__DIR__ . '/../.env')) {
             return;
         }
 
-        $dotenv = new Dotenv(__DIR__.'/..');
+        $dotenv = Dotenv::create(__DIR__ . '/..');
 
         $dotenv->load();
+    }
+
+    /**
+     * Set up the environment.
+     *
+     * @param \Illuminate\Foundation\Application $app
+     */
+    protected function getEnvironmentSetUp($app)
+    {
+        $app['config']->set('cache.default', 'array');
+        $app['config']->set('cache.prefix', 'spatie_tests---');
+
+        $app['config']->set('geocoder.cache.enabled', false);
+        $app['config']->set('geocoder.cache.expiry', 86400);
+        $app['config']->set('geocoder.cache.prefix', '_geocoder:');
+        $app['config']->set('geocoder.cache.driver', 'array');
     }
 }

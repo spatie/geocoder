@@ -70,27 +70,25 @@ This is the content of the config file:
 
 ```php
 return [
+    /*
+     * The api key used when sending Geocoding requests to Google.
+     */
+    'key' => env('GOOGLE_MAPS_GEOCODING_API_KEY', ''),
 
-   /*
-    * The api key used when sending Geocoding requests to Google.
-    */
-   'key' => env('GOOGLE_MAPS_GEOCODING_API_KEY', ''),
+    /*
+     * The language param used to set response translations for textual data.
+     *
+     * More info: https://developers.google.com/maps/faq#languagesupport
+     */
 
+    'language' => '',
 
-   /*
-    * The language param used to set response translations for textual data.
-    *
-    * More info: https://developers.google.com/maps/faq#languagesupport
-    */
-
-   'language' => '',
-
-   /*
-    * The region param used to finetune the geocoding process.
-    *
-    * More info: https://developers.google.com/maps/documentation/geocoding/intro#RegionCodes
-    */
-   'region' => '',
+    /*
+     * The region param used to finetune the geocoding process.
+     *
+     * More info: https://developers.google.com/maps/documentation/geocoding/intro#RegionCodes
+     */
+    'region' => '',
 
     /*
      * The bounds param used to finetune the geocoding process.
@@ -98,13 +96,42 @@ return [
      * More info: https://developers.google.com/maps/documentation/geocoding/intro#Viewports
      */
     'bounds' => '',
-    
-     /*
+
+    /*
      * The country param used to limit results to a specific country.
      *
      * More info: https://developers.google.com/maps/documentation/javascript/geocoding#GeocodingRequests
      */
     'country' => '',
+
+    /** Cache */
+    'cache' => [
+        /*
+         * By default looking caching is disabled, you may enable it to speed up performance and reduce api hits.
+         * Default: false
+         */
+        'enabled' => false,
+
+        /*
+         * By default lookups are cached for 24 hours to speed up performance and reduce api hits.
+         * Default: 24 hours ( 60 seconds * 60 minutes * 24 hours), 86400
+         */
+        'expiry' => (60 * 60 * 24),
+
+        /*
+         * The cache prefix key used to prefix stored lookups.
+         * Default: _geocoder:
+         */
+        'prefix' => '_geocoder:',
+
+        /*
+         * You may optionally indicate a specific cache driver to use for Geocoder caching
+         * using any of the `store` drivers listed in the cache.php config file.
+         * Using null here means to use the `default` set in cache.php.
+         * Default: null
+         */
+        'driver' => null,
+    ],
 ];
 ```
 
@@ -120,6 +147,9 @@ $geocoder = new Geocoder($client);
 $geocoder->setApiKey(config('geocoder.key'));
 
 $geocoder->setCountry(config('US'));
+
+//$geocoder->setCache(bool $cacheEnabled = null, int $cacheExpiry = null, string $cachePrefix = null, string $cacheDriver = null);
+$geocoder->setCache(true /* true, false or null */, 86400 /* 24 hours */, '_geocoder:', null /* null = default cache driver */);
 
 $geocoder->getCoordinatesForAddress('Infinite Loop 1, Cupertino');
 
@@ -199,6 +229,41 @@ Geocoder::getCoordinatesForAddress('Infinite Loop 1, Cupertino');
 
 /*
   This function returns an array with keys
+  "lat" =>  37.331741000000001
+  "lng" => -122.0303329
+  "accuracy" => "ROOFTOP"
+  "formatted_address" => "1 Infinite Loop, Cupertino, CA 95014, Stati Uniti",
+    "viewport" => [
+    "northeast" => [
+      "lat" => 37.3330546802915,
+      "lng" => -122.0294342197085
+    ],
+    "southwest" => [
+      "lat" => 37.3303567197085,
+      "lng" => -122.0321321802915
+    ]
+  ]
+*/
+```
+
+If you are using the package with Laravel, you can also use the Laravel Caching engine.
+Under the hood Cache::remember is used, there are two ways of accessing the cache in Geocoder.
+
+To do this, simply call `getCoordinatesForAddressCached` or `getCoordinatesForAddressCached` to use the cache, even if you have caching disabled in the config.
+Or you can enable caching in the config or via `->setCache(true, ...)` and then simply call `getCoordinatesForAddress` or `getCoordinatesForAddress`.
+
+If caching has been enabled in the config or via `->setCache(true, ...)` and you wish to not use the cache for a particular lookup,
+simply call `getCoordinatesForAddressUncached` or `getCoordinatesForAddressUncached`.
+
+
+```php
+Geocoder::getCoordinatesForAddress('Infinite Loop 1, Cupertino'); // Will run either the Cached or Uncached functions from below, depending if caching is enabled via config or ->setCache(true, ...).
+
+Geocoder::getCoordinatesForAddressCached('Infinite Loop 1, Cupertino'); // Forces the use of caching.
+Geocoder::getCoordinatesForAddressUncached('Infinite Loop 1, Cupertino'); // Forces the use of an uncached/live api query.
+
+/*
+  These functions will return an array with keys
   "lat" =>  37.331741000000001
   "lng" => -122.0303329
   "accuracy" => "ROOFTOP"

@@ -10,13 +10,13 @@ class GeocoderServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->publishes([
-            __DIR__.'/../config/geocoder.php' => config_path('geocoder.php'),
+            __DIR__ . '/../config/geocoder.php' => config_path('geocoder.php'),
         ], 'config');
     }
 
     public function register()
     {
-        $this->mergeConfigFrom(__DIR__.'/../config/geocoder.php', 'geocoder');
+        $this->mergeConfigFrom(__DIR__ . '/../config/geocoder.php', 'geocoder');
 
         $this->app->bind('geocoder', function ($app) {
             $client = app(Client::class);
@@ -26,7 +26,13 @@ class GeocoderServiceProvider extends ServiceProvider
                 ->setLanguage(config('geocoder.language'))
                 ->setRegion(config('geocoder.region'))
                 ->setBounds(config('geocoder.bounds'))
-                ->setCountry(config('geocoder.country'));
+                ->setCountry(config('geocoder.country'))
+                ->setCache(
+                    config('geocoder.cache.enabled'),
+                    config('geocoder.cache.expiry'),
+                    config('geocoder.cache.prefix'),
+                    config('geocoder.cache.driver')
+                );
         });
     }
 }

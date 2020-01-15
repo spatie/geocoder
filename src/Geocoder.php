@@ -30,9 +30,22 @@ class Geocoder
     /** @var string */
     protected $country;
 
+    /** @var bool */
+    protected $cacheEnabled;
+
+    /** @var int */
+    protected $cacheExpiry;
+
+    /** @var string */
+    protected $cachePrefix;
+
+    /** @var string */
+    protected $cacheDriver;
+
     public function __construct(Client $client)
     {
         $this->client = $client;
+        $this->setCache();
     }
 
     public function setApiKey(string $apiKey)
@@ -70,7 +83,37 @@ class Geocoder
         return $this;
     }
 
+    public function setCache(bool $cacheEnabled = null, int $cacheExpiry = null, string $cachePrefix = null, string $cacheDriver = null)
+    {
+        $this->cacheEnabled = is_null($cacheEnabled) ? config('geocoder.cache.enabled') : $cacheEnabled;
+        $this->cacheExpiry = is_null($cacheExpiry) ? config('geocoder.cache.expiry') : $cacheExpiry;
+        $this->cachePrefix = is_null($cachePrefix) ? config('geocoder.cache.prefix') : $cachePrefix;
+        $this->cacheDriver = is_null($cacheDriver) ? config('geocoder.cache.driver') : $cacheDriver;
+
+        return $this;
+    }
+
     public function getCoordinatesForAddress(string $address): array
+    {
+        if (empty($address)) {
+            return $this->emptyResponse();
+        }
+
+        if ($this->cacheEnabled) {
+            return $this->getCoordinatesForAddressCached($address);
+        } else {
+            return $this->getCoordinatesForAddressUncached($address);
+        }
+    }
+
+    public function getCoordinatesForAddressCached(string $address): array
+    {
+        return cache()->driver($this->cacheDriver)->remember($this->cachePrefix . md5($address), $this->cacheExpiry, function () use ($address) {
+            return $this->getCoordinatesForAddressUncached($address);
+        });
+    }
+
+    public function getCoordinatesForAddressUncached(string $address): array
     {
         if (empty($address)) {
             return $this->emptyResponse();
@@ -86,11 +129,11 @@ class Geocoder
 
         $geocodingResponse = json_decode($response->getBody());
 
-        if (! empty($geocodingResponse->error_message)) {
+        if (!empty($geocodingResponse->error_message)) {
             throw CouldNotGeocode::serviceReturnedError($geocodingResponse->error_message);
         }
 
-        if (! count($geocodingResponse->results)) {
+        if (!count($geocodingResponse->results)) {
             return $this->emptyResponse();
         }
 
@@ -98,6 +141,22 @@ class Geocoder
     }
 
     public function getAddressForCoordinates(float $lat, float $lng): array
+    {
+        if ($this->cacheEnabled) {
+            return $this->getAddressForCoordinatesCached($lat, $lng);
+        } else {
+            return $this->getAddressForCoordinatesUncached($lat, $lng);
+        }
+    }
+
+    public function getAddressForCoordinatesCached(float $lat, float $lng): array
+    {
+        return cache()->driver($this->cacheDriver)->remember($this->cachePrefix . md5("{$lat}:{$lng}"), $this->cacheExpiry, function () use ($lat, $lng) {
+            return $this->getAddressForCoordinatesUncached($lat, $lng);
+        });
+    }
+
+    public function getAddressForCoordinatesUncached(float $lat, float $lng): array
     {
         $payload = $this->getRequestPayload([
             'latlng' => "$lat,$lng",
@@ -111,11 +170,11 @@ class Geocoder
 
         $reverseGeocodingResponse = json_decode($response->getBody());
 
-        if (! empty($reverseGeocodingResponse->error_message)) {
+        if (!empty($reverseGeocodingResponse->error_message)) {
             throw CouldNotGeocode::serviceReturnedError($reverseGeocodingResponse->error_message);
         }
 
-        if (! count($reverseGeocodingResponse->results)) {
+        if (!count($reverseGeocodingResponse->results)) {
             return $this->emptyResponse();
         }
 
@@ -147,7 +206,7 @@ class Geocoder
         if ($this->country) {
             $parameters = array_merge(
                 $parameters,
-                ['components' => 'country:'.$this->country]
+                ['components' => 'country:' . $this->country]
             );
         }
 
