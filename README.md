@@ -249,11 +249,11 @@ Geocoder::getCoordinatesForAddress('Infinite Loop 1, Cupertino');
 If you are using the package with Laravel, you can also use the Laravel Caching engine.
 Under the hood Cache::remember is used, there are two ways of accessing the cache in Geocoder.
 
-To do this, simply call `getCoordinatesForAddressCached` or `getCoordinatesForAddressCached` to use the cache, even if you have caching disabled in the config.
-Or you can enable caching in the config or via `->setCache(true, ...)` and then simply call `getCoordinatesForAddress` or `getCoordinatesForAddress`.
+To do this, simply call `getAddressForCoordinatesCached` or `getCoordinatesForAddressCached` to use the cache, even if you have caching disabled in the config.
+Or you can enable caching in the config or via `->setCache(true, ...)` and then simply call `getAddressForCoordinates` or `getCoordinatesForAddress`.
 
 If caching has been enabled in the config or via `->setCache(true, ...)` and you wish to not use the cache for a particular lookup,
-simply call `getCoordinatesForAddressUncached` or `getCoordinatesForAddressUncached`.
+simply call `getAddressForCoordinatesUncached` or `getCoordinatesForAddressUncached`.
 
 
 ```php
