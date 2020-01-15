@@ -16,11 +16,11 @@ class TestCase extends Orchestra
 
     protected function loadEnvironmentVariables()
     {
-        if (!file_exists(__DIR__ . '/../.env')) {
+        if (!file_exists(__DIR__.'/../.env')) {
             return;
         }
 
-        $dotenv = Dotenv::create(__DIR__ . '/..');
+        $dotenv = Dotenv::create(__DIR__.'/..');
 
         $dotenv->load();
     }

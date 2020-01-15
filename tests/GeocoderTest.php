@@ -20,7 +20,7 @@ class GeocoderTest extends TestCase
 
         $apiKey = env('GOOGLE_API_KEY');
 
-        if (!$apiKey) {
+        if (! $apiKey) {
             $this->markTestSkipped('No Google API key was provided.');
 
             return;
@@ -116,7 +116,7 @@ class GeocoderTest extends TestCase
         $this->assertEquals('279 Bedford Ave, Brooklyn, NY 11211, USA', $result['formatted_address']);
 
         // Get result directly from cache.
-        $result = cache()->driver(config('geocoder.cache.driver'))->get('_geocoder:' . md5('279 Bedford Ave, Brooklyn, NY 11211, USA'));
+        $result = cache()->driver(config('geocoder.cache.driver'))->get('_geocoder:'.md5('279 Bedford Ave, Brooklyn, NY 11211, USA'));
 
         $this->assertEquals('279 Bedford Ave, Brooklyn, NY 11211, USA', $result['formatted_address']);
     }
@@ -130,7 +130,7 @@ class GeocoderTest extends TestCase
         $this->assertEquals('279 Bedford Ave, Brooklyn, NY 11211, USA', $result['formatted_address']);
 
         // Get result directly from cache.
-        $result = cache()->driver(config('geocoder.cache.driver'))->get('_geocoder:' . md5('40.714224:-73.961452'));
+        $result = cache()->driver(config('geocoder.cache.driver'))->get('_geocoder:'.md5('40.714224:-73.961452'));
 
         $this->assertEquals('279 Bedford Ave, Brooklyn, NY 11211, USA', $result['formatted_address']);
     }

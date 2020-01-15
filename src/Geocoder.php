@@ -108,7 +108,7 @@ class Geocoder
 
     public function getCoordinatesForAddressCached(string $address): array
     {
-        return cache()->driver($this->cacheDriver)->remember($this->cachePrefix . md5($address), $this->cacheExpiry, function () use ($address) {
+        return cache()->driver($this->cacheDriver)->remember($this->cachePrefix.md5($address), $this->cacheExpiry, function () use ($address) {
             return $this->getCoordinatesForAddressUncached($address);
         });
     }
@@ -129,11 +129,11 @@ class Geocoder
 
         $geocodingResponse = json_decode($response->getBody());
 
-        if (!empty($geocodingResponse->error_message)) {
+        if (! empty($geocodingResponse->error_message)) {
             throw CouldNotGeocode::serviceReturnedError($geocodingResponse->error_message);
         }
 
-        if (!count($geocodingResponse->results)) {
+        if (! count($geocodingResponse->results)) {
             return $this->emptyResponse();
         }
 
@@ -151,7 +151,7 @@ class Geocoder
 
     public function getAddressForCoordinatesCached(float $lat, float $lng): array
     {
-        return cache()->driver($this->cacheDriver)->remember($this->cachePrefix . md5("{$lat}:{$lng}"), $this->cacheExpiry, function () use ($lat, $lng) {
+        return cache()->driver($this->cacheDriver)->remember($this->cachePrefix.md5("{$lat}:{$lng}"), $this->cacheExpiry, function () use ($lat, $lng) {
             return $this->getAddressForCoordinatesUncached($lat, $lng);
         });
     }
@@ -170,11 +170,11 @@ class Geocoder
 
         $reverseGeocodingResponse = json_decode($response->getBody());
 
-        if (!empty($reverseGeocodingResponse->error_message)) {
+        if (! empty($reverseGeocodingResponse->error_message)) {
             throw CouldNotGeocode::serviceReturnedError($reverseGeocodingResponse->error_message);
         }
 
-        if (!count($reverseGeocodingResponse->results)) {
+        if (! count($reverseGeocodingResponse->results)) {
             return $this->emptyResponse();
         }
 
@@ -206,7 +206,7 @@ class Geocoder
         if ($this->country) {
             $parameters = array_merge(
                 $parameters,
-                ['components' => 'country:' . $this->country]
+                ['components' => 'country:'.$this->country]
             );
         }
 
