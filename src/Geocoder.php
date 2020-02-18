@@ -99,7 +99,7 @@ class Geocoder
     public function getAllCoordinatesForAddress(string $address): array
     {
         if (empty($address)) {
-            return $this->emptySingleResponse();
+            return $this->emptyResponse();
         }
 
         $payload = $this->getRequestPayload(compact('address'));
