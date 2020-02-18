@@ -73,7 +73,7 @@ class Geocoder
     public function getCoordinatesForAddress(string $address): array
     {
         if (empty($address)) {
-            return $this->emptyResponse()[0];
+            return $this->emptySingleResponse();
         }
 
         $payload = $this->getRequestPayload(compact('address'));
@@ -90,7 +90,7 @@ class Geocoder
         }
 
         if (! count($geocodingResponse->results)) {
-            return $this->emptyResponse()[0];
+            return $this->emptySingleResponse();
         }
 
         return $this->formatResponse($geocodingResponse)[0];
@@ -99,7 +99,7 @@ class Geocoder
     public function getAllCoordinatesForAddress(string $address): array
     {
         if (empty($address)) {
-            return $this->emptyResponse()[0];
+            return $this->emptySingleResponse();
         }
 
         $payload = $this->getRequestPayload(compact('address'));
@@ -116,7 +116,7 @@ class Geocoder
         }
 
         if (! count($geocodingResponse->results)) {
-            return $this->emptyResponse()[0];
+            return $this->emptyResponse();
         }
 
         return $this->formatResponse($geocodingResponse);
@@ -136,7 +136,7 @@ class Geocoder
             throw CouldNotGeocode::serviceReturnedError($reverseGeocodingResponse->error_message);
         }
         if (! count($reverseGeocodingResponse->results)) {
-            return $this->emptyResponse()[0];
+            return $this->emptySingleResponse();
         }
 
         return $this->formatResponse($reverseGeocodingResponse)[0];
@@ -144,10 +144,8 @@ class Geocoder
 
     protected function formatResponse($response): array
     {
-        $locations = [];
-
-        foreach ($response->results as $result) {
-            array_push($locations, [
+        $locations = array_map(function($result){
+            return [
                 'lat' => $result->geometry->location->lat,
                 'lng' => $result->geometry->location->lng,
                 'accuracy' => $result->geometry->location_type,
@@ -155,8 +153,8 @@ class Geocoder
                 'viewport' => $result->geometry->viewport,
                 'address_components' => $result->address_components,
                 'place_id' => $result->place_id,
-            ]);
-        }
+            ];
+        }, $response->results);
 
         return $locations;
     }
@@ -190,6 +188,17 @@ class Geocoder
                 'formatted_address' => static::RESULT_NOT_FOUND,
                 'viewport' => static::RESULT_NOT_FOUND,
             ],
+        ];
+    }
+
+    protected function emptySingleResponse(): array
+    {
+        return [
+            'lat' => 0,
+            'lng' => 0,
+            'accuracy' => static::RESULT_NOT_FOUND,
+            'formatted_address' => static::RESULT_NOT_FOUND,
+            'viewport' => static::RESULT_NOT_FOUND,
         ];
     }
 }
