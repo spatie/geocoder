@@ -144,7 +144,7 @@ class Geocoder
 
     protected function formatResponse($response): array
     {
-        $locations = array_map(function($result){
+        $locations = array_map(function ($result) {
             return [
                 'lat' => $result->geometry->location->lat,
                 'lng' => $result->geometry->location->lng,
