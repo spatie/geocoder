@@ -74,7 +74,7 @@ class Geocoder
     public function getCoordinatesForAddress(string $address): array
     {
         if (empty($address)) {
-            return $this->emptyResponse()->first();
+            return $this->emptyResponse()[0];
         }
 
         $payload = $this->getRequestPayload(compact('address'));
@@ -91,16 +91,16 @@ class Geocoder
         }
 
         if (! count($geocodingResponse->results)) {
-            return $this->emptyResponse()->first();
+            return $this->emptyResponse()[0];
         }
 
-        return $this->formatResponse($geocodingResponse)->first();
+        return $this->formatResponse($geocodingResponse)[0];
     }
 
-    public function getAllCoordinatesForAddress(string $address): Collection
+    public function getAllCoordinatesForAddress(string $address): array
     {
         if (empty($address)) {
-            return $this->emptyResponse();
+            return $this->emptyResponse()[0];
         }
 
         $payload = $this->getRequestPayload(compact('address'));
@@ -117,7 +117,7 @@ class Geocoder
         }
 
         if (! count($geocodingResponse->results)) {
-            return $this->emptyResponse();
+            return $this->emptyResponse()[0];
         }
 
         return $this->formatResponse($geocodingResponse);
@@ -137,17 +137,17 @@ class Geocoder
             throw CouldNotGeocode::serviceReturnedError($reverseGeocodingResponse->error_message);
         }
         if (! count($reverseGeocodingResponse->results)) {
-            return $this->emptyResponse()->first();
+            return $this->emptyResponse()[0];
         }
-        return $this->formatResponse($reverseGeocodingResponse)->first();
+        return $this->formatResponse($reverseGeocodingResponse)[0];
     }
 
-    protected function formatResponse($response): Collection
+    protected function formatResponse($response): array
     {
-        $locations = new Collection;
+        $locations = array();
 
         foreach($response->results as $result) {
-            $locations->push([
+            array_push($locations, [
                 'lat' => $result->geometry->location->lat,
                 'lng' => $result->geometry->location->lng,
                 'accuracy' => $result->geometry->location_type,
@@ -180,9 +180,9 @@ class Geocoder
         return ['query' => $parameters];
     }
 
-    protected function emptyResponse(): Collection
+    protected function emptyResponse(): array
     {
-        return new Collection([
+        return [
           [
             'lat' => 0,
             'lng' => 0,
@@ -190,6 +190,6 @@ class Geocoder
             'formatted_address' => static::RESULT_NOT_FOUND,
             'viewport' => static::RESULT_NOT_FOUND,
           ],
-        ]);
+        ];
     }
 }

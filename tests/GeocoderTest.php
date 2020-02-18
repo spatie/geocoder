@@ -47,10 +47,10 @@ class GeocoderTest extends TestCase
     {
         $results = $this->geocoder->getAllCoordinatesForAddress('Washingtons');
 
-        $this->assertInstanceOf(Collection::class, $results);
-        $this->assertTrue($results->count() > 1);
+        $this->assertIsArray($results);
+        $this->assertIsArray($results[0]);
 
-        $result = $results->first();
+        $result = $results[0];
 
         $this->assertArrayHasKey('lat', $result);
         $this->assertArrayHasKey('lng', $result);
