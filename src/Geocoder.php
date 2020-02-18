@@ -138,6 +138,7 @@ class Geocoder
         if (! count($reverseGeocodingResponse->results)) {
             return $this->emptyResponse()[0];
         }
+
         return $this->formatResponse($reverseGeocodingResponse)[0];
     }
 
@@ -189,6 +190,6 @@ class Geocoder
                 'formatted_address' => static::RESULT_NOT_FOUND,
                 'viewport' => static::RESULT_NOT_FOUND,
             ],
-         ];
+        ];
     }
 }
