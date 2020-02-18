@@ -4,7 +4,6 @@ namespace Spatie\Geocoder\Tests;
 
 use GuzzleHttp\Client;
 use Spatie\Geocoder\Geocoder;
-use Illuminate\Support\Collection;
 
 class GeocoderTest extends TestCase
 {
@@ -63,7 +62,6 @@ class GeocoderTest extends TestCase
     public function it_should_return_an_empty_response_when_called_with_empty_query()
     {
         $this->assertEquals($this->emptyResponse(), $this->geocoder->getCoordinatesForAddress(''));
-
     }
 
     /** @test */

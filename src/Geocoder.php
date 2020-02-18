@@ -3,7 +3,6 @@
 namespace Spatie\Geocoder;
 
 use GuzzleHttp\Client;
-use Illuminate\Support\Collection;
 use Spatie\Geocoder\Exceptions\CouldNotGeocode;
 
 class Geocoder
@@ -144,9 +143,9 @@ class Geocoder
 
     protected function formatResponse($response): array
     {
-        $locations = array();
+        $locations = [];
 
-        foreach($response->results as $result) {
+        foreach ($response->results as $result) {
             array_push($locations, [
                 'lat' => $result->geometry->location->lat,
                 'lng' => $result->geometry->location->lng,
@@ -183,13 +182,13 @@ class Geocoder
     protected function emptyResponse(): array
     {
         return [
-          [
-            'lat' => 0,
-            'lng' => 0,
-            'accuracy' => static::RESULT_NOT_FOUND,
-            'formatted_address' => static::RESULT_NOT_FOUND,
-            'viewport' => static::RESULT_NOT_FOUND,
-          ],
-        ];
+            [
+                'lat' => 0,
+                'lng' => 0,
+                'accuracy' => static::RESULT_NOT_FOUND,
+                'formatted_address' => static::RESULT_NOT_FOUND,
+                'viewport' => static::RESULT_NOT_FOUND,
+            ],
+         ];
     }
 }
