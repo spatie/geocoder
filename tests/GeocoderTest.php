@@ -3,6 +3,7 @@
 namespace Spatie\Geocoder\Tests;
 
 use GuzzleHttp\Client;
+use Spatie\Geocoder\Facades\Geocoder as GeocoderFacade;
 use Spatie\Geocoder\Geocoder;
 
 class GeocoderTest extends TestCase
@@ -105,6 +106,14 @@ class GeocoderTest extends TestCase
             ->getCoordinatesForAddress('Winnetka');
 
         $this->assertEquals('Winnetka, Los Angeles, CA, USA', $results['formatted_address']);
+    }
+
+    /** @test */
+    public function it_can_be_used_with_a_laravel_facade()
+    {
+        $results = GeocoderFacade::getCoordinatesForAddress('Infinite Loop 1, Cupertino');
+
+        $this->assertArrayHasKey('place_id', $results);
     }
 
     protected function emptyResponse(): array
