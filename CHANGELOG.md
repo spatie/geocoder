@@ -2,6 +2,10 @@
 
 All notable changes to `geocoder` will be documented in this file.
 
+## 3.7.0 - 2020-03-03
+
+- add support for Laravel 7
+
 ## 3.6.1 - 2019-01-04
 
 - improve testability by resolving the guzzle client out of the container
