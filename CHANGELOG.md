@@ -2,7 +2,7 @@
 
 All notable changes to `geocoder` will be documented in this file.
 
-## 3.7.0 - 2020-03-03
+## 3.7.0 - 2020-03-04
 
 - add support for Laravel 7
 
