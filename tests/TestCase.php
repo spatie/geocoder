@@ -3,8 +3,7 @@
 namespace Spatie\Geocoder\Tests;
 
 use Dotenv\Dotenv;
-use \Orchestra\Testbench\TestCase as Orchestra;
-use Spatie\DirectoryCleanup\DirectoryCleanupServiceProvider;
+use Orchestra\Testbench\TestCase as Orchestra;
 use Spatie\Geocoder\GeocoderServiceProvider;
 
 class TestCase extends Orchestra
@@ -26,7 +25,7 @@ class TestCase extends Orchestra
         if (! file_exists(__DIR__.'/../.env')) {
             return;
         }
-        $dotenv = Dotenv::createImmutable(__DIR__ . '/..');
+        $dotenv = Dotenv::createImmutable(__DIR__.'/..');
 
         $dotenv->load();
     }
