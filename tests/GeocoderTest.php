@@ -133,10 +133,10 @@ class GeocoderTest extends TestCase
             return $apiKey;
         }
 
-        $apiKeyPath = __DIR__ . '/../.apiKey';
+        $apiKeyPath = __DIR__.'/../.apiKey';
 
         if (! file_exists($apiKeyPath)) {
-            return null;
+            return;
         }
 
         return file_get_contents($apiKeyPath);
