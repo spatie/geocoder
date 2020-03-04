@@ -44,3 +44,5 @@ jobs:
 
             -   name: Execute tests
                 run: vendor/bin/phpunit
+                env:
+                    - GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
