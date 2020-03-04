@@ -111,6 +111,8 @@ class GeocoderTest extends TestCase
     /** @test */
     public function it_can_be_used_with_a_laravel_facade()
     {
+        config()->set('geocoder.key', env('GOOGLE_API_KEY'));
+
         $results = GeocoderFacade::getCoordinatesForAddress('Infinite Loop 1, Cupertino');
 
         $this->assertArrayHasKey('place_id', $results);
