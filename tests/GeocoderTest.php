@@ -41,6 +41,23 @@ class GeocoderTest extends TestCase
     }
 
     /** @test */
+    public function it_can_geocode_a_city_with_multiple_responses()
+    {
+        $results = $this->geocoder->getAllCoordinatesForAddress('Washingtons');
+
+        $this->assertIsArray($results);
+        $this->assertIsArray($results[0]);
+
+        $result = $results[0];
+
+        $this->assertArrayHasKey('lat', $result);
+        $this->assertArrayHasKey('lng', $result);
+        $this->assertArrayHasKey('accuracy', $result);
+        $this->assertArrayHasKey('formatted_address', $result);
+        $this->assertArrayHasKey('viewport', $result);
+    }
+
+    /** @test */
     public function it_should_return_an_empty_response_when_called_with_empty_query()
     {
         $this->assertEquals($this->emptyResponse(), $this->geocoder->getCoordinatesForAddress(''));

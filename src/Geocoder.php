@@ -73,11 +73,36 @@ class Geocoder
     public function getCoordinatesForAddress(string $address): array
     {
         if (empty($address)) {
+            return $this->emptySingleResponse();
+        }
+
+        $payload = $this->getRequestPayload(compact('address'));
+        $response = $this->client->request('GET', $this->endpoint, $payload);
+
+        if ($response->getStatusCode() !== 200) {
+            throw CouldNotGeocode::couldNotConnect();
+        }
+
+        $geocodingResponse = json_decode($response->getBody());
+
+        if (! empty($geocodingResponse->error_message)) {
+            throw CouldNotGeocode::serviceReturnedError($geocodingResponse->error_message);
+        }
+
+        if (! count($geocodingResponse->results)) {
+            return $this->emptySingleResponse();
+        }
+
+        return $this->formatResponse($geocodingResponse)[0];
+    }
+
+    public function getAllCoordinatesForAddress(string $address): array
+    {
+        if (empty($address)) {
             return $this->emptyResponse();
         }
 
         $payload = $this->getRequestPayload(compact('address'));
-
         $response = $this->client->request('GET', $this->endpoint, $payload);
 
         if ($response->getStatusCode() !== 200) {
@@ -102,37 +127,36 @@ class Geocoder
         $payload = $this->getRequestPayload([
             'latlng' => "$lat,$lng",
         ]);
-
         $response = $this->client->request('GET', $this->endpoint, $payload);
-
         if ($response->getStatusCode() !== 200) {
             throw CouldNotGeocode::couldNotConnect();
         }
-
         $reverseGeocodingResponse = json_decode($response->getBody());
-
         if (! empty($reverseGeocodingResponse->error_message)) {
             throw CouldNotGeocode::serviceReturnedError($reverseGeocodingResponse->error_message);
         }
-
         if (! count($reverseGeocodingResponse->results)) {
-            return $this->emptyResponse();
+            return $this->emptySingleResponse();
         }
 
-        return $this->formatResponse($reverseGeocodingResponse);
+        return $this->formatResponse($reverseGeocodingResponse)[0];
     }
 
     protected function formatResponse($response): array
     {
-        return [
-            'lat' => $response->results[0]->geometry->location->lat,
-            'lng' => $response->results[0]->geometry->location->lng,
-            'accuracy' => $response->results[0]->geometry->location_type,
-            'formatted_address' => $response->results[0]->formatted_address,
-            'viewport' => $response->results[0]->geometry->viewport,
-            'address_components' => $response->results[0]->address_components,
-            'place_id' => $response->results[0]->place_id,
-        ];
+        $locations = array_map(function ($result) {
+            return [
+                'lat' => $result->geometry->location->lat,
+                'lng' => $result->geometry->location->lng,
+                'accuracy' => $result->geometry->location_type,
+                'formatted_address' => $result->formatted_address,
+                'viewport' => $result->geometry->viewport,
+                'address_components' => $result->address_components,
+                'place_id' => $result->place_id,
+            ];
+        }, $response->results);
+
+        return $locations;
     }
 
     protected function getRequestPayload(array $parameters): array
@@ -155,6 +179,19 @@ class Geocoder
     }
 
     protected function emptyResponse(): array
+    {
+        return [
+            [
+                'lat' => 0,
+                'lng' => 0,
+                'accuracy' => static::RESULT_NOT_FOUND,
+                'formatted_address' => static::RESULT_NOT_FOUND,
+                'viewport' => static::RESULT_NOT_FOUND,
+            ],
+        ];
+    }
+
+    protected function emptySingleResponse(): array
     {
         return [
             'lat' => 0,

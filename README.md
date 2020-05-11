@@ -172,6 +172,52 @@ $geocoder
 */
 ```
 
+You can also get all the results instead of the first one
+```php
+$geocoder
+   ->getAllCoordinatesForAddress('Infinite Loop 1, Cupertino');
+
+/*
+  This function returns an array of results (array of array)
+  ^ array:2 [
+      0 => array:7 [
+        "lat" => 37,3318115
+        "lng" => -122,0301837
+        "accuracy" => "ROOFTOP"
+        "formatted_address" => "1 Infinite Loop, Cupertino, CA 95014, Stati Uniti"
+        "viewport" => [
+          "northeast" => [
+            "lat" => 37.3330546802915,
+            "lng" => -122.0294342197085
+          ],
+          "southwest" => [
+            "lat" => 37.3303567197085,
+            "lng" => -122.0321321802915
+          ]
+        ]
+        "place_id" => "ChIJHTRqF7e1j4ARzZ_Fv8VA4Eo"
+      ]
+      1 => array:7 [
+        "lat" => 37,3318598
+        "lng" => -122,0302485
+        "accuracy" => "ROOFTOP"
+        "formatted_address" => "Infinite Loop 1, 1 Infinite Loop, Cupertino, CA 95014, Stati Uniti"
+        "viewport" => [
+          "northeast" => [
+            "lat" => 37.333046180291
+            "lng" => -122.02883961971
+          ],
+          "southwest" => [
+            "lat" => 37.330348219708
+            "lng" => -122.03153758029
+          ]
+        ]
+        "place_id" => "ChIJAf9D3La1j4ARuwKZtGjgMXw"
+      ]
+    ]
+*/
+```
+
 This is how you can reverse geocode coordinates to addresses.
 
 ```php

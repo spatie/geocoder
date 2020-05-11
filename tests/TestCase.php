@@ -25,6 +25,7 @@ class TestCase extends Orchestra
         if (! file_exists(__DIR__.'/../.env')) {
             return;
         }
+
         $dotenv = Dotenv::createImmutable(__DIR__.'/..');
 
         $dotenv->load();
