@@ -3,9 +3,10 @@
 namespace Spatie\Geocoder\Tests;
 
 use Dotenv\Dotenv;
-use PHPUnit\Framework\TestCase as PHPUnitTestCase;
+use Orchestra\Testbench\TestCase as Orchestra;
+use Spatie\Geocoder\GeocoderServiceProvider;
 
-class TestCase extends PHPUnitTestCase
+class TestCase extends Orchestra
 {
     protected function setUp(): void
     {
@@ -14,13 +15,18 @@ class TestCase extends PHPUnitTestCase
         $this->loadEnvironmentVariables();
     }
 
+    protected function getPackageProviders($app)
+    {
+        return [GeocoderServiceProvider::class];
+    }
+
     protected function loadEnvironmentVariables()
     {
         if (! file_exists(__DIR__.'/../.env')) {
             return;
         }
 
-        $dotenv = Dotenv::create(__DIR__.'/..');
+        $dotenv = Dotenv::createImmutable(__DIR__.'/..');
 
         $dotenv->load();
     }

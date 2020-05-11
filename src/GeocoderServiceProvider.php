@@ -19,7 +19,9 @@ class GeocoderServiceProvider extends ServiceProvider
         $this->mergeConfigFrom(__DIR__.'/../config/geocoder.php', 'geocoder');
 
         $this->app->bind('geocoder', function ($app) {
-            return (new Geocoder(new Client))
+            $client = app(Client::class);
+
+            return (new Geocoder($client))
                 ->setApiKey(config('geocoder.key'))
                 ->setLanguage(config('geocoder.language'))
                 ->setRegion(config('geocoder.region'))

@@ -3,6 +3,7 @@
 namespace Spatie\Geocoder\Tests;
 
 use GuzzleHttp\Client;
+use Spatie\Geocoder\Facades\Geocoder as GeocoderFacade;
 use Spatie\Geocoder\Geocoder;
 
 class GeocoderTest extends TestCase
@@ -18,9 +19,7 @@ class GeocoderTest extends TestCase
 
         $this->geocoder = new Geocoder($client);
 
-        $apiKey = env('GOOGLE_API_KEY');
-
-        if (! $apiKey) {
+        if (! $apiKey = $this->getApiKey()) {
             $this->markTestSkipped('No Google API key was provided.');
 
             return;
@@ -124,6 +123,16 @@ class GeocoderTest extends TestCase
         $this->assertEquals('Winnetka, Los Angeles, CA, USA', $results['formatted_address']);
     }
 
+    /** @test */
+    public function it_can_be_used_with_a_laravel_facade()
+    {
+        config()->set('geocoder.key', $this->getApiKey());
+
+        $results = GeocoderFacade::getCoordinatesForAddress('Infinite Loop 1, Cupertino');
+
+        $this->assertArrayHasKey('place_id', $results);
+    }
+
     protected function emptyResponse(): array
     {
         return [
@@ -133,5 +142,20 @@ class GeocoderTest extends TestCase
             'formatted_address' => Geocoder::RESULT_NOT_FOUND,
             'viewport' => Geocoder::RESULT_NOT_FOUND,
         ];
+    }
+
+    protected function getApiKey()
+    {
+        if ($apiKey = env('GOOGLE_API_KEY')) {
+            return $apiKey;
+        }
+
+        $apiKeyPath = __DIR__.'/../.apiKey';
+
+        if (! file_exists($apiKeyPath)) {
+            return;
+        }
+
+        return file_get_contents($apiKeyPath);
     }
 }
