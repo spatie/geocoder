@@ -2,6 +2,10 @@
 
 All notable changes to `geocoder` will be documented in this file.
 
+## 3.8.1 - 2020-07-01
+
+- allow Guzzle 7
+
 ## 3.8.0 - 2020-05-11
 
 - return multiple results as array rather than just the first one (#73)
