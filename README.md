@@ -279,7 +279,7 @@ The accuracy key can contain these values:
 
 You can read more information about these values [on the Google Geocoding API Page](https://developers.google.com/maps/documentation/geocoding/ "Google Geocoding API")
 
-When an address is not found accuracy and formatted_address will contain `NOT_FOUND`
+When an address is not found accuracy and formatted_address will contain `result_not_found`
 
 ## Credits
 
