@@ -72,28 +72,9 @@ class Geocoder
 
     public function getCoordinatesForAddress(string $address): array
     {
-        if (empty($address)) {
-            return $this->emptySingleResponse();
-        }
+        $response = $this->getAllCoordinatesForAddress($address);
 
-        $payload = $this->getRequestPayload(compact('address'));
-        $response = $this->client->request('GET', $this->endpoint, $payload);
-
-        if ($response->getStatusCode() !== 200) {
-            throw CouldNotGeocode::couldNotConnect();
-        }
-
-        $geocodingResponse = json_decode($response->getBody());
-
-        if (! empty($geocodingResponse->error_message)) {
-            throw CouldNotGeocode::serviceReturnedError($geocodingResponse->error_message);
-        }
-
-        if (! count($geocodingResponse->results)) {
-            return $this->emptySingleResponse();
-        }
-
-        return $this->formatResponse($geocodingResponse)[0];
+        return $response[0];
     }
 
     public function getAllCoordinatesForAddress(string $address): array
@@ -124,6 +105,13 @@ class Geocoder
 
     public function getAddressForCoordinates(float $lat, float $lng): array
     {
+        $response = $this->getAllAddressesForCoordinates($lat, $lng);
+
+        return $response[0];
+    }
+
+    public function getAllAddressesForCoordinates(float $lat, float $lng): array
+    {
         $payload = $this->getRequestPayload([
             'latlng' => "$lat,$lng",
         ]);
@@ -136,10 +124,10 @@ class Geocoder
             throw CouldNotGeocode::serviceReturnedError($reverseGeocodingResponse->error_message);
         }
         if (! count($reverseGeocodingResponse->results)) {
-            return $this->emptySingleResponse();
+            return $this->emptyResponse();
         }
 
-        return $this->formatResponse($reverseGeocodingResponse)[0];
+        return $this->formatResponse($reverseGeocodingResponse);
     }
 
     protected function formatResponse($response): array
@@ -188,17 +176,6 @@ class Geocoder
                 'formatted_address' => static::RESULT_NOT_FOUND,
                 'viewport' => static::RESULT_NOT_FOUND,
             ],
-        ];
-    }
-
-    protected function emptySingleResponse(): array
-    {
-        return [
-            'lat' => 0,
-            'lng' => 0,
-            'accuracy' => static::RESULT_NOT_FOUND,
-            'formatted_address' => static::RESULT_NOT_FOUND,
-            'viewport' => static::RESULT_NOT_FOUND,
         ];
     }
 }

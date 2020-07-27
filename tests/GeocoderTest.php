@@ -98,6 +98,25 @@ class GeocoderTest extends TestCase
     }
 
     /** @test */
+    public function it_can_translate_coordinates_to_multiple_addresses()
+    {
+        $results = $this->geocoder->getAllAddressesForCoordinates(40.714224, -73.961452);
+
+        $this->assertIsArray($results);
+        $this->assertIsArray($results[0]);
+
+        $result = $results[0];
+
+        $this->assertEquals('277 Bedford Ave, Brooklyn, NY 11211, USA', $result['formatted_address']);
+
+        $result = $this->geocoder
+            ->setLanguage('nl')
+            ->getAddressForCoordinates(40.714224, -73.961452);
+
+        $this->assertEquals('277 Bedford Ave, Brooklyn, NY 11211, Verenigde Staten', $result['formatted_address']);
+    }
+
+    /** @test */
     public function it_can_include_the_address_components_in_a_response()
     {
         $results = $this->geocoder->getCoordinatesForAddress('Infinite Loop 1, Cupertino');
