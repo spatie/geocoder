@@ -2,6 +2,10 @@
 
 All notable changes to `geocoder` will be documented in this file.
 
+## 3.9.0 - 2020-07-27
+
+- return multiple results for reverse-geocoding (#86)
+
 ## 3.8.1 - 2020-07-01
 
 - allow Guzzle 7
