@@ -2,6 +2,10 @@
 
 All notable changes to `geocoder` will be documented in this file.
 
+## 3.9.1 - 2020-08-06
+
+- add ability to resolve Geocoder from the fully qualified class name (#87)
+
 ## 3.9.0 - 2020-07-27
 
 - return multiple results for reverse-geocoding (#86)
