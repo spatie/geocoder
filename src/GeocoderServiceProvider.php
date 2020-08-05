@@ -28,5 +28,7 @@ class GeocoderServiceProvider extends ServiceProvider
                 ->setBounds(config('geocoder.bounds'))
                 ->setCountry(config('geocoder.country'));
         });
+
+        $this->app->bind(Geocoder::class, 'geocoder');
     }
 }

@@ -152,6 +152,26 @@ class GeocoderTest extends TestCase
         $this->assertArrayHasKey('place_id', $results);
     }
 
+    /** @test */
+    public function it_can_be_resolved_from_the_container_with_the_alias()
+    {
+        config()->set('geocoder.key', $this->getApiKey());
+
+        $results = resolve('geocoder')->getCoordinatesForAddress('Infinite Loop 1, Cupertino');
+
+        $this->assertArrayHasKey('place_id', $results);
+    }
+
+    /** @test */
+    public function it_can_be_resolved_from_the_container_with_the_full_class_name()
+    {
+        config()->set('geocoder.key', $this->getApiKey());
+
+        $results = resolve(Geocoder::class)->getCoordinatesForAddress('Infinite Loop 1, Cupertino');
+
+        $this->assertArrayHasKey('place_id', $results);
+    }
+
     protected function emptyResponse(): array
     {
         return [
