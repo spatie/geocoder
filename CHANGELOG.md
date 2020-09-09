@@ -2,6 +2,10 @@
 
 All notable changes to `geocoder` will be documented in this file.
 
+## 3.9.2 - 2020-09-09
+
+- Add support for Laravel 8
+
 ## 3.9.1 - 2020-08-06
 
 - add ability to resolve Geocoder from the fully qualified class name (#87)

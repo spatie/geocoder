@@ -3,6 +3,7 @@
 [![Latest Version](https://img.shields.io/github/release/spatie/geocoder.svg?style=flat-square)](https://github.com/spatie/geocoder/releases)
 [![MIT Licensed](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE.md)
 ![GitHub Workflow Status](https://img.shields.io/github/workflow/status/spatie/geocoder/run-tests?label=tests)
+![Check & fix styling](https://github.com/spatie/geocoder/workflows/Check%20&%20fix%20styling/badge.svg)
 [![Total Downloads](https://img.shields.io/packagist/dt/spatie/geocoder.svg?style=flat-square)](https://packagist.org/packages/spatie/geocoder)
 
 This package can convert any address to GPS coordinates using [Google's geocoding service](https://developers.google.com/maps/documentation/geocoding/start). Here's a quick example:
