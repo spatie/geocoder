@@ -2,6 +2,10 @@
 
 All notable changes to `geocoder` will be documented in this file.
 
+## 3.10.0 - 2020-12-01
+
+- add `plus_code` to formatted response (#91)
+
 ## 3.9.3 - 2020-12-01
 
 - Add support for PHP 8.0 ([#90](https://github.com/spatie/geocoder/pull/90))
