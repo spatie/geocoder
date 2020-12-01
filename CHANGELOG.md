@@ -2,6 +2,10 @@
 
 All notable changes to `geocoder` will be documented in this file.
 
+## 3.9.3 - 2020-12-01
+
+- Add support for PHP 8.0 ([#90](https://github.com/spatie/geocoder/pull/90))
+
 ## 3.9.2 - 2020-09-09
 
 - Add support for Laravel 8
