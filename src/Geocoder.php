@@ -141,6 +141,7 @@ class Geocoder
                 'viewport' => $result->geometry->viewport,
                 'address_components' => $result->address_components,
                 'place_id' => $result->place_id,
+                'plus_code' => $result->plus_code,
             ];
         }, $response->results);
 
