@@ -2,6 +2,10 @@
 
 All notable changes to `geocoder` will be documented in this file.
 
+## 3.10.1 - 2020-12-02
+
+- revert previous version
+
 ## 3.10.0 - 2020-12-01
 
 - add `plus_code` to formatted response (#91)
