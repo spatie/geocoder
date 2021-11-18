@@ -2,6 +2,12 @@
 
 All notable changes to `geocoder` will be documented in this file.
 
+## 3.11.0 - 2021-11-18
+
+- Add support for PHP 8.1
+
+**Full Changelog**: https://github.com/spatie/geocoder/compare/3.10.1...3.11.0
+
 ## 3.10.1 - 2020-12-02
 
 - revert previous version
@@ -94,12 +100,12 @@ All notable changes to `geocoder` will be documented in this file.
 - fixed the naming of variables in the `Geocoder` interface
 
 ### 2.3.0 - 2016-09-01
-    
+
 - added support for regions and languages
 - added Laravel integration
 
 ### 2.2.0 - 2016-08-20
-    
+
 - add `formatted_address` to result
 
 ### 2.1.3 - 2016-08-07
