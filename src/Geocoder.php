@@ -7,7 +7,7 @@ use Spatie\Geocoder\Exceptions\CouldNotGeocode;
 
 class Geocoder
 {
-    const RESULT_NOT_FOUND = 'result_not_found';
+    public const RESULT_NOT_FOUND = 'result_not_found';
 
     /** @var \GuzzleHttp\Client */
     protected $client;
