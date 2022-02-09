@@ -139,7 +139,7 @@ class GeocoderTest extends TestCase
             ->setBounds('34.172684,-118.604794|34.236144,-118.500938')
             ->getCoordinatesForAddress('Winnetka');
 
-        $this->assertEquals('Winnetka, Los Angeles, CA, USA', $results['formatted_address']);
+        $this->assertEquals('Winnetka, IL, USA', $results['formatted_address']);
     }
 
     /** @test */
