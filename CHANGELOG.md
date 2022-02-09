@@ -2,6 +2,18 @@
 
 All notable changes to `geocoder` will be documented in this file.
 
+## 3.12.0 - 2022-02-09
+
+## What's Changed
+
+- Support illuminate/support 9.0 by @austenc in https://github.com/spatie/geocoder/pull/99
+
+## New Contributors
+
+- @austenc made their first contribution in https://github.com/spatie/geocoder/pull/99
+
+**Full Changelog**: https://github.com/spatie/geocoder/compare/3.11.0...3.12.0
+
 ## 3.11.0 - 2021-11-18
 
 - Add support for PHP 8.1
