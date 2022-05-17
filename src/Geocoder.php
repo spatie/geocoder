@@ -77,6 +77,38 @@ class Geocoder
         return $response[0];
     }
 
+    public function getCoordinatesForPlaceId(string $placeId): array
+    {
+        if (empty($placeId)) {
+            return $this->emptyResponse();
+        }
+
+        $payload = [
+            'query' => [
+                'key' => $this->apiKey,
+                'language' => $this->language,
+                'place_id' => $placeId,
+            ]
+        ];
+        $response = $this->client->request('GET', $this->endpoint, $payload);
+
+        if ($response->getStatusCode() !== 200) {
+            throw CouldNotGeocode::couldNotConnect();
+        }
+
+        $geocodingResponse = json_decode($response->getBody());
+
+        if (! empty($geocodingResponse->error_message)) {
+            throw CouldNotGeocode::serviceReturnedError($geocodingResponse->error_message);
+        }
+
+        if (! count($geocodingResponse->results)) {
+            return $this->emptyResponse();
+        }
+
+        return $this->formatResponse($geocodingResponse)[0];
+    }
+
     public function getAllCoordinatesForAddress(string $address): array
     {
         if (empty($address)) {
