@@ -317,6 +317,140 @@ Geocoder::getCoordinatesForAddress('Infinite Loop 1, Cupertino');
 */
 ```
 
+You can get result using place_id
+
+```php
+$geocoder
+   ->setLanguage('de')
+   ->getCoordinatesForPlaceId('ChIJOYyxRDpOqEcRzYVdaT0Sa1Q');
+
+/*
+  This function returns an array with keys
+  Array
+  (
+    "lat" => 52.5102586
+    "lng" => 13.4218842
+    "accuracy" => ROOFTOP
+    "formatted_address" => Michaelkirchstraße 13, 10179 Berlin, Deutschland
+    "viewport" => stdClass Object
+        (
+            [northeast] => stdClass Object
+                (
+                    "lat" => 52.511621430291
+                    "lng" => 13.423181430291
+                )
+
+            [southwest] => stdClass Object
+                (
+                    "lat" => 52.508923469708
+                    "lng" => 13.420483469709
+                )
+
+        )
+
+    "address_components" => Array
+        (
+            [0] => stdClass Object
+                (
+                    "long_name" => 13
+                    "short_name" => 13
+                    "types" => Array
+                        (
+                            [0] => street_number
+                        )
+
+                )
+
+            [1] => stdClass Object
+                (
+                    "long_name" => Michaelkirchstraße
+                    "short_name" => Michaelkirchstraße
+                    "types" => Array
+                        (
+                            [0] => route
+                        )
+
+                )
+
+            [2] => stdClass Object
+                (
+                    "long_name" => Mitte
+                    "short_name" => Mitte
+                    "types" => Array
+                        (
+                            [0] => political
+                            [1] => sublocality
+                            [2] => sublocality_level_1
+                        )
+
+                )
+
+            [3] => stdClass Object
+                (
+                    "long_name" => Berlin
+                    "short_name" => Berlin
+                    "types" => Array
+                        (
+                            [0] => locality
+                            [1] => political
+                        )
+
+                )
+
+            [4] => stdClass Object
+                (
+                    "long_name" => Kreisfreie Stadt Berlin
+                    "short_name" => Kreisfreie Stadt Berlin
+                    "types" => Array
+                        (
+                            [0] => administrative_area_level_3
+                            [1] => political
+                        )
+
+                )
+
+            [5] => stdClass Object
+                (
+                    "long_name" => Berlin
+                    "short_name" => BE
+                    "types" => Array
+                        (
+                            [0] => administrative_area_level_1
+                            [1] => political
+                        )
+
+                )
+
+            [6] => stdClass Object
+                (
+                    "long_name" => Deutschland
+                    "short_name" => DE
+                    "types" => Array
+                        (
+                            [0] => country
+                            [1] => political
+                        )
+
+                )
+
+            [7] => stdClass Object
+                (
+                    "long_name" => 10179
+                    "short_name" => 10179
+                    "types" => Array
+                        (
+                            [0] => postal_code
+                        )
+
+                )
+
+        )
+
+    "place_id" => ChIJOYyxRDpOqEcRzYVdaT0Sa1Q
+)
+*/
+```
+
 The accuracy key can contain these values:
 - `ROOFTOP`
 - `RANGE_INTERPOLATED`

@@ -172,6 +172,14 @@ class GeocoderTest extends TestCase
         $this->assertArrayHasKey('place_id', $results);
     }
 
+    /** @test */
+    public function it_can_be_fetched_by_place_id()
+    {
+        $results = $this->geocoder->getCoordinatesForPlaceId('ChIJOYyxRDpOqEcRzYVdaT0Sa1Q');
+
+        $this->assertArrayHasKey('place_id', $results);
+    }
+
     protected function emptyResponse(): array
     {
         return [
