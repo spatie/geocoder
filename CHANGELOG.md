@@ -2,6 +2,10 @@
 
 All notable changes to `geocoder` will be documented in this file.
 
+## 3.13.0 - 2022-05-18
+
+**Full Changelog**: https://github.com/spatie/geocoder/compare/3.12.0...3.13.0
+
 ## 3.12.0 - 2022-02-09
 
 ## What's Changed
