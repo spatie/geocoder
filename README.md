@@ -317,7 +317,7 @@ Geocoder::getCoordinatesForAddress('Infinite Loop 1, Cupertino');
 */
 ```
 
-You can get result using place_id
+You can get the results of a `placeId` using `getCoordinatesForPlaceId`:
 
 ```php
 $geocoder
