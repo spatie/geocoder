@@ -2,6 +2,18 @@
 
 All notable changes to `geocoder` will be documented in this file.
 
+## 3.13.1 - 2022-06-26
+
+### What's Changed
+
+- Update Geocoding API doc url by @newjett0617 in https://github.com/spatie/geocoder/pull/102
+
+### New Contributors
+
+- @newjett0617 made their first contribution in https://github.com/spatie/geocoder/pull/102
+
+**Full Changelog**: https://github.com/spatie/geocoder/compare/3.13.0...3.13.1
+
 ## 3.13.0 - 2022-05-18
 
 **Full Changelog**: https://github.com/spatie/geocoder/compare/3.12.0...3.13.0
