@@ -18,14 +18,14 @@ return [
     /*
      * The region param used to finetune the geocoding process.
      *
-     * More info: https://developers.google.com/maps/documentation/geocoding/intro#RegionCodes
+     * More info: https://developers.google.com/maps/documentation/geocoding/requests-geocoding#RegionCodes
      */
     'region' => '',
 
     /*
      * The bounds param used to finetune the geocoding process.
      *
-     * More info: https://developers.google.com/maps/documentation/geocoding/intro#Viewports
+     * More info: https://developers.google.com/maps/documentation/geocoding/requests-geocoding#Viewports
      */
     'bounds' => '',
 
