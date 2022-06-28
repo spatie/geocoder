@@ -2,6 +2,18 @@
 
 All notable changes to `geocoder` will be documented in this file.
 
+## 3.14.0 - 2022-06-28
+
+### What's Changed
+
+- Update formatResponse to include partial_match by @MultiSuperFreek in https://github.com/spatie/geocoder/pull/103
+
+### New Contributors
+
+- @MultiSuperFreek made their first contribution in https://github.com/spatie/geocoder/pull/103
+
+**Full Changelog**: https://github.com/spatie/geocoder/compare/3.13.1...3.14.0
+
 ## 3.13.1 - 2022-06-26
 
 ### What's Changed
