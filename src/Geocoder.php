@@ -140,7 +140,7 @@ class Geocoder
                 'formatted_address' => $result->formatted_address,
                 'viewport' => $result->geometry->viewport,
                 'address_components' => $result->address_components,
-                'partial_match' => $result->partial_match,
+                'partial_match' => isset($result->partial_match) ? $result->partial_match : false ,
                 'place_id' => $result->place_id,
             ];
         }, $response->results);
