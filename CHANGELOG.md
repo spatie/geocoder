@@ -2,6 +2,10 @@
 
 All notable changes to `geocoder` will be documented in this file.
 
+## 3.14.1 - 2022-06-29
+
+- fix `partial_match` error
+
 ## 3.14.0 - 2022-06-28
 
 ### What's Changed
