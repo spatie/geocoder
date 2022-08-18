@@ -157,25 +157,17 @@ $geocoder->getCoordinatesForAddress('Infinite Loop 1, Cupertino');
 You can get the result back in a specific language.
 
 ```php
-$geocoder
-   ->getCoordinatesForAddress('Infinite Loop 1, Cupertino')
-   ->setLanguage('it');
+$geocoder->setLanguage('it');
+
+$geocoder->getCoordinatesForAddress('Infinite Loop 1, Cupertino');
 
 /*
   This function returns an array with keys
-  "lat" =>  37.331741000000001
-  "lng" => -122.0303329
+  "lat" => 37,3318598
+  "lng" => -122,0302485
   "accuracy" => "ROOFTOP"
-  "viewport" => [
-    "northeast" => [
-      "lat" => 37.3330546802915,
-      "lng" => -122.0294342197085
-    ],
-    "southwest" => [
-      "lat" => 37.3303567197085,
-      "lng" => -122.0321321802915
-    ]
-  ]
+  "formatted_address" => "Infinite Loop 1, 1 Infinite Loop, Cupertino, CA 95014, Stati Uniti"
+  ...
 */
 ```
 
