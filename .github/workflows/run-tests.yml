@@ -18,12 +18,15 @@ jobs:
                         testbench: 8.*
                     -   laravel: 9.*
                         testbench: 7.*
+                exclude:
+                    -   laravel: 10.*
+                        php: 8.0                
 
         name: P${{ matrix.php }} - L${{ matrix.laravel }} - ${{ matrix.dependency-version }} - ${{ matrix.os }}
 
         steps:
             -   name: Checkout code
-                uses: actions/checkout@v2
+                uses: actions/checkout@v3
 
             -   name: Cache dependencies
                 uses: actions/cache@v1
