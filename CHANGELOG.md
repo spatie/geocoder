@@ -2,6 +2,22 @@
 
 All notable changes to `geocoder` will be documented in this file.
 
+## 3.14.2 - 2023-02-01
+
+### What's Changed
+
+- Fixes the example for a specific language by @hofmannsven in https://github.com/spatie/geocoder/pull/107
+- Add PHP 8.2 Support by @patinthehat in https://github.com/spatie/geocoder/pull/108
+- Laravel 10.x Compatibility by @laravel-shift in https://github.com/spatie/geocoder/pull/110
+
+### New Contributors
+
+- @hofmannsven made their first contribution in https://github.com/spatie/geocoder/pull/107
+- @patinthehat made their first contribution in https://github.com/spatie/geocoder/pull/108
+- @laravel-shift made their first contribution in https://github.com/spatie/geocoder/pull/110
+
+**Full Changelog**: https://github.com/spatie/geocoder/compare/3.14.1...3.14.2
+
 ## 3.14.1 - 2022-06-29
 
 - fix `partial_match` error
