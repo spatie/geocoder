@@ -2,6 +2,18 @@
 
 All notable changes to `geocoder` will be documented in this file.
 
+## 3.15.0 - 2023-10-17
+
+### What's Changed
+
+- Return types by @francoism90 in https://github.com/spatie/geocoder/pull/112
+
+### New Contributors
+
+- @francoism90 made their first contribution in https://github.com/spatie/geocoder/pull/112
+
+**Full Changelog**: https://github.com/spatie/geocoder/compare/3.14.2...3.15.0
+
 ## 3.14.2 - 2023-02-01
 
 ### What's Changed
