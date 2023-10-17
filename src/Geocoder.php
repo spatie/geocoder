@@ -115,19 +115,19 @@ class Geocoder
         $payload = $this->getRequestPayload([
             'latlng' => "$lat,$lng",
         ]);
-        
+
         $response = $this->client->request('GET', $this->endpoint, $payload);
-        
+
         if ($response->getStatusCode() !== 200) {
             throw CouldNotGeocode::couldNotConnect();
         }
-        
+
         $reverseGeocodingResponse = json_decode($response->getBody());
-        
+
         if (! empty($reverseGeocodingResponse->error_message)) {
             throw CouldNotGeocode::serviceReturnedError($reverseGeocodingResponse->error_message);
         }
-        
+
         if (! count($reverseGeocodingResponse->results)) {
             return $this->emptyResponse();
         }
