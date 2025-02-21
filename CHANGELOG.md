@@ -2,6 +2,14 @@
 
 All notable changes to `geocoder` will be documented in this file.
 
+## 3.16.1 - 2025-02-21
+
+### What's Changed
+
+* Laravel 12.x Compatibility by @laravel-shift in https://github.com/spatie/geocoder/pull/115
+
+**Full Changelog**: https://github.com/spatie/geocoder/compare/3.16.0...3.16.1
+
 ## 3.16.0 - 2024-03-02
 
 ### What's Changed
