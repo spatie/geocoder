@@ -1,10 +1,20 @@
-# Geocode addresses to coordinates
+<div align="left">
+    <a href="https://spatie.be/open-source?utm_source=github&utm_medium=banner&utm_campaign=geocoder" target="_blank">
+      <picture>
+        <source media="(prefers-color-scheme: dark)" srcset="https://spatie.be/packages/header/geocoder/html/dark.webp">
+        <img alt="Logo for Geocoder" src=" https://spatie.be/packages/header/geocoder/html/light.webp" height="190">
+      </picture>
+    </a>
 
+<h1>Geocode Addresses into Coordinates</h1>
+    
 [![Latest Version](https://img.shields.io/github/release/spatie/geocoder.svg?style=flat-square)](https://github.com/spatie/geocoder/releases)
 [![MIT Licensed](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE.md)
 [![run-tests](https://github.com/spatie/geocoder/actions/workflows/run-tests.yml/badge.svg)](https://github.com/spatie/geocoder/actions/workflows/run-tests.yml)
 ![Check & fix styling](https://github.com/spatie/geocoder/workflows/Check%20&%20fix%20styling/badge.svg)
 [![Total Downloads](https://img.shields.io/packagist/dt/spatie/geocoder.svg?style=flat-square)](https://packagist.org/packages/spatie/geocoder)
+    
+</div>
 
 This package can convert any address to GPS coordinates using [Google's geocoding service](https://developers.google.com/maps/documentation/geocoding/start). Here's a quick example:
 
