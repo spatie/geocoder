@@ -2,7 +2,7 @@
     <a href="https://spatie.be/open-source?utm_source=github&utm_medium=banner&utm_campaign=geocoder" target="_blank">
       <picture>
         <source media="(prefers-color-scheme: dark)" srcset="https://spatie.be/packages/header/geocoder/html/dark.webp">
-        <img alt="Logo for Geocoder" src=" https://spatie.be/packages/header/geocoder/html/light.webp" height="190">
+        <img alt="Logo for Geocoder" src=" https://spatie.be/packages/header/geocoder/html/light.webp">
       </picture>
     </a>
 
