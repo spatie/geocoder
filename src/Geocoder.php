@@ -90,6 +90,19 @@ class Geocoder
         return $response[0];
     }
 
+    /**
+     * @return array<int, array{
+     *     lat: float,
+     *     lng: float,
+     *     accuracy: string,
+     *     formatted_address: string,
+     *     viewport: object{northeast: object{lat: float, lng: float}, southwest: object{lat: float, lng: float}},
+     *     address_components: array<int, object{long_name: string, short_name: string, types: array<int, string>}>,
+     *     partial_match: bool,
+     *     place_id: string,
+     *     types: array<int, string>
+     * }>
+     */
     public function getAllCoordinatesForAddress(string $address): array
     {
         if (empty($address)) {
