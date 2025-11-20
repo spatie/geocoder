@@ -2,6 +2,15 @@
 
 All notable changes to `geocoder` will be documented in this file.
 
+## 3.16.2 - 2025-11-20
+
+### What's Changed
+
+* Update issue template by @AlexVanderbist in https://github.com/spatie/geocoder/pull/116
+* Update docblock for `getCoordinatesForAddress`
+
+**Full Changelog**: https://github.com/spatie/geocoder/compare/3.16.1...3.16.2
+
 ## 3.16.1 - 2025-02-21
 
 ### What's Changed
