@@ -74,7 +74,7 @@ class GeocoderTest extends TestCase
     {
         $result = $this->geocoder->getCoordinatesForAddress('Roma, Italy');
 
-        $this->assertEquals('Rome, Metropolitan City of Rome, Italy', $result['formatted_address']);
+        $this->assertEquals('Rome, Metropolitan City of Rome Capital, Italy', $result['formatted_address']);
 
         $result = $this->geocoder
             ->setLanguage('it')
@@ -88,13 +88,13 @@ class GeocoderTest extends TestCase
     {
         $result = $this->geocoder->getAddressForCoordinates(40.714224, -73.961452);
 
-        $this->assertEquals('277 Bedford Ave, Brooklyn, NY 11211, USA', $result['formatted_address']);
+        $this->assertEquals('279 Bedford Ave, Brooklyn, NY 11211, USA', $result['formatted_address']);
 
         $result = $this->geocoder
             ->setLanguage('nl')
             ->getAddressForCoordinates(40.714224, -73.961452);
 
-        $this->assertEquals('277 Bedford Ave, Brooklyn, NY 11211, Verenigde Staten', $result['formatted_address']);
+        $this->assertEquals('279 Bedford Ave, Brooklyn, NY 11211, Verenigde Staten', $result['formatted_address']);
     }
 
     /** @test */
@@ -107,13 +107,13 @@ class GeocoderTest extends TestCase
 
         $result = $results[0];
 
-        $this->assertEquals('277 Bedford Ave, Brooklyn, NY 11211, USA', $result['formatted_address']);
+        $this->assertEquals('279 Bedford Ave, Brooklyn, NY 11211, USA', $result['formatted_address']);
 
         $result = $this->geocoder
             ->setLanguage('nl')
             ->getAddressForCoordinates(40.714224, -73.961452);
 
-        $this->assertEquals('277 Bedford Ave, Brooklyn, NY 11211, Verenigde Staten', $result['formatted_address']);
+        $this->assertEquals('279 Bedford Ave, Brooklyn, NY 11211, Verenigde Staten', $result['formatted_address']);
     }
 
     /** @test */
@@ -139,7 +139,7 @@ class GeocoderTest extends TestCase
             ->setBounds('34.172684,-118.604794|34.236144,-118.500938')
             ->getCoordinatesForAddress('Winnetka');
 
-        $this->assertEquals('Winnetka, IL, USA', $results['formatted_address']);
+        $this->assertEquals('Winnetka, Los Angeles, CA, USA', $results['formatted_address']);
     }
 
     /** @test */
