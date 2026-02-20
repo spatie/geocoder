@@ -2,6 +2,17 @@
 
 All notable changes to `geocoder` will be documented in this file.
 
+## 4.0.0 - 2026-02-20
+
+### What's changed
+
+- Add Laravel 13.x compatibility
+- Require PHP 8.3+
+- Require Laravel 11+
+- Update PHPUnit to 11/12
+- Fix CI: update deprecated GitHub Actions (cache v1 → v4, checkout v3 → v4)
+- Update test expectations for current Google Geocoding API responses
+
 ## 3.16.2 - 2025-11-20
 
 ### What's Changed
