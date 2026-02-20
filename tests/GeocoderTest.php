@@ -29,7 +29,7 @@ class GeocoderTest extends TestCase
     }
 
     /** @test */
-    public function it_can_geocode_a_city()
+    public function test_it_can_geocode_a_city()
     {
         $result = $this->geocoder->getCoordinatesForAddress('Antwerp');
 
@@ -41,7 +41,7 @@ class GeocoderTest extends TestCase
     }
 
     /** @test */
-    public function it_can_geocode_a_city_with_multiple_responses()
+    public function test_it_can_geocode_a_city_with_multiple_responses()
     {
         $results = $this->geocoder->getAllCoordinatesForAddress('Washingtons');
 
@@ -58,19 +58,19 @@ class GeocoderTest extends TestCase
     }
 
     /** @test */
-    public function it_should_return_an_empty_response_when_called_with_empty_query()
+    public function test_it_should_return_an_empty_response_when_called_with_empty_query()
     {
         $this->assertEquals($this->emptyResponse(), $this->geocoder->getCoordinatesForAddress(''));
     }
 
     /** @test */
-    public function it_should_return_an_empty_response_when_using_a_non_existing_city()
+    public function test_it_should_return_an_empty_response_when_using_a_non_existing_city()
     {
         $this->assertEquals($this->emptyResponse(), $this->geocoder->getCoordinatesForAddress('Spatieville'));
     }
 
     /** @test */
-    public function it_can_translate_the_data()
+    public function test_it_can_translate_the_data()
     {
         $result = $this->geocoder->getCoordinatesForAddress('Roma, Italy');
 
@@ -84,7 +84,7 @@ class GeocoderTest extends TestCase
     }
 
     /** @test */
-    public function it_can_translate_coordinates_to_an_address()
+    public function test_it_can_translate_coordinates_to_an_address()
     {
         $result = $this->geocoder->getAddressForCoordinates(40.714224, -73.961452);
 
@@ -98,7 +98,7 @@ class GeocoderTest extends TestCase
     }
 
     /** @test */
-    public function it_can_translate_coordinates_to_multiple_addresses()
+    public function test_it_can_translate_coordinates_to_multiple_addresses()
     {
         $results = $this->geocoder->getAllAddressesForCoordinates(40.714224, -73.961452);
 
@@ -117,7 +117,7 @@ class GeocoderTest extends TestCase
     }
 
     /** @test */
-    public function it_can_include_the_address_components_in_a_response()
+    public function test_it_can_include_the_address_components_in_a_response()
     {
         $results = $this->geocoder->getCoordinatesForAddress('Infinite Loop 1, Cupertino');
 
@@ -125,7 +125,7 @@ class GeocoderTest extends TestCase
     }
 
     /** @test */
-    public function it_includes_the_place_id_in_a_response()
+    public function test_it_includes_the_place_id_in_a_response()
     {
         $results = $this->geocoder->getCoordinatesForAddress('Infinite Loop 1, Cupertino');
 
@@ -133,7 +133,7 @@ class GeocoderTest extends TestCase
     }
 
     /** @test */
-    public function it_should_prefer_a_neighborhood_inside_of_payload_bounds()
+    public function test_it_should_prefer_a_neighborhood_inside_of_payload_bounds()
     {
         $results = $this->geocoder
             ->setBounds('34.172684,-118.604794|34.236144,-118.500938')
@@ -143,7 +143,7 @@ class GeocoderTest extends TestCase
     }
 
     /** @test */
-    public function it_can_be_used_with_a_laravel_facade()
+    public function test_it_can_be_used_with_a_laravel_facade()
     {
         config()->set('geocoder.key', $this->getApiKey());
 
@@ -153,7 +153,7 @@ class GeocoderTest extends TestCase
     }
 
     /** @test */
-    public function it_can_be_resolved_from_the_container_with_the_alias()
+    public function test_it_can_be_resolved_from_the_container_with_the_alias()
     {
         config()->set('geocoder.key', $this->getApiKey());
 
@@ -163,7 +163,7 @@ class GeocoderTest extends TestCase
     }
 
     /** @test */
-    public function it_can_be_resolved_from_the_container_with_the_full_class_name()
+    public function test_it_can_be_resolved_from_the_container_with_the_full_class_name()
     {
         config()->set('geocoder.key', $this->getApiKey());
 
