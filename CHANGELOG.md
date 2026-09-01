@@ -2,6 +2,15 @@
 
 All notable changes to `geocoder` will be documented in this file.
 
+## 4.1.0 - 2026-09-01
+
+### What's changed
+
+- Add Guzzle 8 compatibility by @marijoo in https://github.com/spatie/geocoder/pull/119
+- Update test expectations for current Google Geocoding API responses
+
+**Full Changelog**: https://github.com/spatie/geocoder/compare/4.0.0...4.1.0
+
 ## 4.0.0 - 2026-02-20
 
 ### What's changed
